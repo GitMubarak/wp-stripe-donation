@@ -1,0 +1,21 @@
+    div#wpsd-preview-image {
+        display: block;
+        width: 150px;
+        height: auto;
+        padding: 5px;
+        border: 1px solid #999;
+        border-radius: 3px;
+    }
+    
+    div#wpsd-preview-image img#wpsd-preview-image {
+        width: 100%;
+    }
+	
+	table#wpc_data_table {
+		margin-bottom:10px;
+	}
+	
+	.column-wpsd_donated_amount, table#wpc_data_table > tbody > tr > td.wpsd-donated-amount {
+		width: 55px;
+		text-align: right;
+	}

@@ -1,0 +1,365 @@
+/* alert started */
+
+.wpsd-alert {
+    padding: 10px!important;
+    color: white;
+    display: none;
+    width: 100%;
+    padding: 10px 15px;
+    height: auto;
+    font-size: 14px;
+    line-height: 18px;
+    border-radius: 5px;
+    transition: all 0.3s linear;
+    margin: 0 0 20px;
+}
+
+.wpsd-alert.success {
+    background-color: #6ABD6E;
+}
+
+.wpsd-alert.error {
+    background-color: #F66358;
+}
+
+.wpsd-alert.warning {
+    background-color: #FFAA2B;
+}
+
+
+/* alert ended */
+
+.wpsd-wrapper-content .dashicons,
+.dashicons-before::before {
+    font-size: 12px;
+    line-height: 46px;
+}
+
+.wpsd-master-wrapper {
+    box-shadow: 0 3px 20px #C0C0C0;
+    margin: 15px 0;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-header {
+    background: #808080;
+    background: -moz-linear-gradient(top, #808080 0%, #C0C0C0 100%);
+    background: -webkit-linear-gradient(top, #808080 0%, #C0C0C0 100%);
+    background: linear-gradient(to bottom, #808080 0%, #C0C0C0 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#808080', endColorstr='#C0C0C0', GradientType=1);
+    padding: 30px 15px;
+    text-align: center;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content {
+    padding: 30px 25px;
+    text-align: center;
+    background: #fefdfa;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content h2 {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 700;
+    color: #161c2d;
+    margin: 0 0 15px;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content p {
+    color: #161c2d;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 0 30px;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-donation-form-label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+    height: auto;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0px;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-text-field {
+    width: 100%;
+    border: 1px solid #808080;
+    padding: 10px 15px;
+    height: auto;
+    font-size: 13px;
+    line-height: 18px;
+    border-radius: 5px;
+    box-shadow: 0 0px 15px #C0C0C0;
+    transition: all 0.3s linear;
+    margin: 0 0 20px;
+    outline: none;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-text-field::placeholder {
+    color: #798096;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-text-field:focus {
+    box-shadow: 0 0px 20px #808080;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content ul#wpsd_donate_amount {
+    clear: both;
+    width: 100%;
+    height: auto;
+    line-height: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0px 15px;
+    font-size: 13px;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    box-shadow: 0 0px 15px #C0C0C0;
+    transition: all 0.3s linear;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content ul#wpsd_donate_amount li {
+    border: 0px solid #000;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
+    border: 1px solid #808080;
+    margin: 0;
+    padding: 4px;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-donate-button {
+    width: 50%;
+    margin: 0 auto;
+    border: none;
+    background: #808080;
+    font-size: 13px;
+    line-height: 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s linear;
+    outline: none;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-donate-button:hover,
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-donate-button:focus,
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-donate-button:hover,
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-donate-button:focus,
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-donate-button:hover,
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-donate-button:focus,
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-donate-button:hover,
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-donate-button:focus,
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-donate-button:hover,
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-donate-button:focus,
+.wpsd-master-wrapper.wpsd-template-5 .wpsd-wrapper-content .wpsd-donate-button:hover,
+.wpsd-master-wrapper.wpsd-template-5 .wpsd-wrapper-content .wpsd-donate-button:focus,
+.wpsd-master-wrapper.wpsd-template-6 .wpsd-wrapper-content .wpsd-donate-button:hover,
+.wpsd-master-wrapper.wpsd-template-6 .wpsd-wrapper-content .wpsd-donate-button:focus {
+    background: #333333;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-total-donation-today {
+    margin: 10px 0;
+    color: #798096;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content .wpsd-total-donation-today span#wpsd-total-donation-number {
+    color: #FF0000;
+}
+
+
+/*=============================
+Template 1
+===============================*/
+
+.wpsd-master-wrapper.wpsd-template-1 {
+    box-shadow: 0 3px 20px #FFC0CB;
+}
+
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-header {
+    background: #FF69B4;
+    background: -moz-linear-gradient(top, #FF69B4 0%, #FFC0CB 100%);
+    background: -webkit-linear-gradient(top, #FF69B4 0%, #FFC0CB 100%);
+    background: linear-gradient(to bottom, #FF69B4 0%, #FFC0CB 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#FF69B4', endColorstr='#FFC0CB', GradientType=1);
+}
+
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content {
+    background: #fefdfa;
+}
+
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-donate-button {
+    background: #FF69B4;
+}
+
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-text-field,
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content ul#wpsd_donate_amount {
+    box-shadow: 0 0px 15px #FFC0CB;
+    border-color: #FF69B4;
+}
+
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
+    border-color: #FF69B4;
+}
+
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-text-field:focus {
+    box-shadow: 0 0px 15px #FF69B4;
+}
+
+
+/*=============================
+Template 2
+===============================*/
+
+.wpsd-master-wrapper.wpsd-template-2 {
+    box-shadow: 0 3px 20px #40E0D0;
+}
+
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-header {
+    background: #008B8B;
+    background: -moz-linear-gradient(top, #008B8B 0%, #40E0D0 100%);
+    background: -webkit-linear-gradient(top, #008B8B 0%, #40E0D0 100%);
+    background: linear-gradient(to bottom, #008B8B 0%, #40E0D0 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#008B8B', endColorstr='#40E0D0', GradientType=1);
+}
+
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content {
+    background: #EFFAFF;
+}
+
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-donate-button {
+    background: #008B8B;
+}
+
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-text-field,
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content ul#wpsd_donate_amount {
+    box-shadow: 0 0px 15px #40E0D0;
+    border-color: #008B8B;
+}
+
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
+    border-color: #008B8B;
+}
+
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-text-field:focus {
+    box-shadow: 0 0px 15px #008B8B;
+}
+
+
+/*=============================
+Template 3
+===============================*/
+
+.wpsd-master-wrapper.wpsd-template-3 {
+    box-shadow: 0 3px 20px #87CEFA;
+}
+
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-header {
+    background: #1E90FF;
+    background: -moz-linear-gradient(top, #1E90FF 0%, #87CEFA 100%);
+    background: -webkit-linear-gradient(top, #1E90FF 0%, #87CEFA 100%);
+    background: linear-gradient(to bottom, #1E90FF 0%, #87CEFA 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1E90FF', endColorstr='#87CEFA', GradientType=1);
+}
+
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content {
+    background: #F1FEFF;
+}
+
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-donate-button {
+    background: #1E90FF;
+}
+
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-text-field,
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content ul#wpsd_donate_amount {
+    box-shadow: 0 0px 15px rgba(87, 189, 199, 0.2);
+    border-color: #1E90FF;
+}
+
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
+    border-color: #1E90FF;
+}
+
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-text-field:focus {
+    box-shadow: 0 0px 15px #1E90FF;
+}
+
+
+/*=============================
+Template 4
+===============================*/
+
+.wpsd-master-wrapper.wpsd-template-4 {
+    box-shadow: 0 3px 20px #DEB887;
+}
+
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-header {
+    background: #DEB887;
+    background: -moz-linear-gradient(top, #DEB887 0%, #FFDEAD 100%);
+    background: -webkit-linear-gradient(top, #DEB887 0%, #FFDEAD 100%);
+    background: linear-gradient(to bottom, #DEB887 0%, #FFDEAD 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#DEB887', endColorstr='#FFDEAD', GradientType=1);
+}
+
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content {
+    background: #FFF8DC;
+}
+
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-donate-button {
+    background: #DEB887;
+}
+
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-text-field,
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content ul#wpsd_donate_amount {
+    box-shadow: 0 0px 15px #FFDEAD;
+    border-color: #DEB887;
+}
+
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
+    border-color: #DEB887;
+}
+
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-text-field:focus {
+    box-shadow: 0 0px 15px #DEB887;
+}
+
+
+/*=============================
+      Responsive CSS
+  ===============================*/
+
+@media(max-width:991px) {
+    .wpsd-master-wrapper .wpsd-wrapper-content {
+        padding: 30px 10px;
+    }
+}
+
+@media(max-width:767px) {
+    .wpsd-master-wrapper .wpsd-wrapper-content {
+        padding: 30px 15px;
+    }
+}
+
+
+/*  */
