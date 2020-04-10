@@ -3,7 +3,7 @@
 /**
  * Plugin Name: 	WP Stripe Donation
  * Plugin URI:		http://wordpress.org/plugins/wp-stripe-donation/
- * Description: 	This WordPress Stripe Donation is a simple plugin that allows you to collect Stripe donations on your website
+ * Description: 	This WordPress Stripe Donation is a simple plugin that allows you to collect donations on your website via Stripe payment method.
  * Version: 		1.1
  * Author: 			Hossni Mubarak
  * Author URI: 		http://www.hossnimubarak.com

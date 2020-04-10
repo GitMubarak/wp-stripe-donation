@@ -31,7 +31,8 @@
                         amount: wpsdDonateAmount,
                         donation_for: $("#wpsd_donation_for").val(),
                         name: $("#wpsd_donator_name").val(),
-                        phone: $("#wpsd_donator_phone").val()
+                        phone: $("#wpsd_donator_phone").val(),
+                        currency: wpsdAdminScriptObj.currency,
                     },
                     success: function(response) {
                         $('#wpsd-donation-message').show('slow').addClass(response.status).html(response.message);

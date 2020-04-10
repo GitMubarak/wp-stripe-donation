@@ -1,7 +1,7 @@
 /* alert started */
 
 .wpsd-alert {
-    padding: 10px!important;
+    padding: 10px !important;
     color: white;
     display: none;
     width: 100%;
@@ -41,12 +41,8 @@
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-header {
-    background: #808080;
-    background: -moz-linear-gradient(top, #808080 0%, #C0C0C0 100%);
-    background: -webkit-linear-gradient(top, #808080 0%, #C0C0C0 100%);
-    background: linear-gradient(to bottom, #808080 0%, #C0C0C0 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#808080', endColorstr='#C0C0C0', GradientType=1);
-    padding: 30px 15px;
+    background: #000;
+    padding: 20px 15px;
     text-align: center;
 }
 
@@ -57,6 +53,12 @@
     line-height: 30px;
     font-weight: 600;
     color: #ffffff;
+}
+
+img.wpsd-form-banner {
+    border: 0px solid #000;
+    width: 100%;
+    height: auto;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content {
@@ -122,7 +124,7 @@
     flex-wrap: wrap;
     list-style: none;
     margin: 0 0 20px;
-    padding: 0px 15px;
+    padding: 5px 15px 5px;
     font-size: 13px;
     border: 1px solid #808080;
     border-radius: 5px;
@@ -139,14 +141,14 @@
 .wpsd-master-wrapper .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
     border: 1px solid #808080;
     margin: 0;
-    padding: 4px;
+    padding: 0 4px;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content .wpsd-donate-button {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
     border: none;
-    background: #808080;
+    background: #24B47E;
     font-size: 13px;
     line-height: 18px;
     text-transform: uppercase;
@@ -202,7 +204,7 @@ Template 1
     background: -moz-linear-gradient(top, #FF69B4 0%, #FFC0CB 100%);
     background: -webkit-linear-gradient(top, #FF69B4 0%, #FFC0CB 100%);
     background: linear-gradient(to bottom, #FF69B4 0%, #FFC0CB 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#FF69B4', endColorstr='#FFC0CB', GradientType=1);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#FF69B4', endColorstr='#FFC0CB', GradientType=1);
 }
 
 .wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content {
@@ -241,7 +243,7 @@ Template 2
     background: -moz-linear-gradient(top, #008B8B 0%, #40E0D0 100%);
     background: -webkit-linear-gradient(top, #008B8B 0%, #40E0D0 100%);
     background: linear-gradient(to bottom, #008B8B 0%, #40E0D0 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#008B8B', endColorstr='#40E0D0', GradientType=1);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#008B8B', endColorstr='#40E0D0', GradientType=1);
 }
 
 .wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content {
@@ -280,7 +282,7 @@ Template 3
     background: -moz-linear-gradient(top, #1E90FF 0%, #87CEFA 100%);
     background: -webkit-linear-gradient(top, #1E90FF 0%, #87CEFA 100%);
     background: linear-gradient(to bottom, #1E90FF 0%, #87CEFA 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1E90FF', endColorstr='#87CEFA', GradientType=1);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1E90FF', endColorstr='#87CEFA', GradientType=1);
 }
 
 .wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content {
@@ -319,7 +321,7 @@ Template 4
     background: -moz-linear-gradient(top, #DEB887 0%, #FFDEAD 100%);
     background: -webkit-linear-gradient(top, #DEB887 0%, #FFDEAD 100%);
     background: linear-gradient(to bottom, #DEB887 0%, #FFDEAD 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#DEB887', endColorstr='#FFDEAD', GradientType=1);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#DEB887', endColorstr='#FFDEAD', GradientType=1);
 }
 
 .wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content {

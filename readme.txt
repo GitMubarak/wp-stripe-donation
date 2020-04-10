@@ -13,9 +13,9 @@ This plugin will display a form to accept donation via Stripe payment.
 
 == Description ==
 
-This [WordPress Stripe Donation](http://www.hossnimubarak.com) plugin will allow you to collect Stripe donations on your website.
+This [WordPress Stripe Donation](http://www.hossnimubarak.com) plugin will allow you to collect donations on your website via Stripe payment method.
 
-You can place a Stripe Donation form in any page where you want to collect money. Donors can use their Stripe account or Credit Card to donate money to you.
+You can place a Donation form in any page where you want to collect money. Donors can use their Stripe account or Credit Card to donate money to you.
 
 What makes this [WordPress Stripe Donation](http://plugin.hossnimubarak.com/wp-stripe-donation/) plugin powerful is its usability. After installation and some quick settings, donors from around the world can start donating to you via Stripe.
 
@@ -37,6 +37,9 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 * Stripe Payment Logo Changing option available (When Stripe PopUp occurs)
 * View donations list in your WordPress admin panel
 * Super Easy and Fast
+* Currency option added (New)
+* Donation form banner upload option added (New)
+* 5 colorful template added in template settings (New)
 
 
 ➡️ Useage of Shortcode:⬅️
@@ -99,9 +102,24 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 == Screenshots ==
 
-1. TBA
+1. Donation Key Settings Page
+2. Donation General Settings Page
+3. Donation Template Settings Page
+4. Display All Donations in Admin Panel
+5. Donation Form Template 1
+6. Donation Form Template 2
+7. Donation Form Template 3
+8. Donation Form Template 4
+9. Donation Form Template 5
+
 
 == Changelog ==
+
+= 1.1 =
+* Currency option added
+* Template settings submenu added
+* Donation form banner upload option added
+* 5 colorful template added in template settings
 
 = 1.0 =
 * Initial release

@@ -5,6 +5,7 @@
  */
 class Wpsd_Admin
 {
+	use HM_Currency;
 
 	private $wpsd_version;
 	private $wpsd_option_group;
@@ -50,6 +51,15 @@ class Wpsd_Admin
 			'manage_options',
 			'wpsd-general-settings',
 			array($this, WPSD_PRFX . 'general_settings')
+		);
+
+		add_submenu_page(
+			'wpsd-admin-settings',
+			esc_html__('Template Settings', WPSD_TXT_DOMAIN),
+			esc_html__('Template Settings', WPSD_TXT_DOMAIN),
+			'manage_options',
+			'wpsd-template-settings',
+			array($this, WPSD_PRFX . 'template_settings')
 		);
 
 		add_submenu_page(
@@ -110,6 +120,11 @@ class Wpsd_Admin
 		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'general-settings.php';
 	}
 
+	function wpsd_template_settings()
+	{
+		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'template-settings.php';
+	}
+
 	function wpsd_all_donations()
 	{
 		$wpsdColumns = array(
@@ -142,7 +157,7 @@ class Wpsd_Admin
 	function wpsd_get_image()
 	{
 		if (isset($_GET['id'])) {
-			$image = wp_get_attachment_image(filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT), 'thumbnail', false, array('id' => 'wpsd-preview-image'));
+			$image = wp_get_attachment_image(filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT), esc_html($_GET['img_type']), false, array('id' => esc_html($_GET['prev_id'])));
 			$data = array(
 				'image' => $image,
 			);

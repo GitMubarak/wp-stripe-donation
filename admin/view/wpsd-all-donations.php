@@ -1,5 +1,11 @@
 <?php
 $wpsdDonations = $this->wpsd_get_all_donations();
+$wpsdGeneralSettings = stripslashes_deep(unserialize(get_option('wpsd_general_settings')));
+if (is_array($wpsdGeneralSettings)) {
+    $wpsdDonateCurrency = $wpsdGeneralSettings['wpsd_donate_currency'];
+} else {
+    $wpsdDonateCurrency = "USD";
+}
 ?>
 
 <div id="wpsd-wrap-all" class="wrap">
@@ -21,7 +27,7 @@ $wpsdDonations = $this->wpsd_get_all_donations();
                 foreach ($wpsdDonations as $donation) : ?>
             <tr>
                 <td class="wpsd-donated-amount"><?php printf('%s', $donation->wpsd_donated_amount); ?></td>
-                <td>USD</td>
+                <td><?php echo esc_html($wpsdDonateCurrency); ?></td>
                 <td><?php printf('%s', $donation->wpsd_donation_for); ?></td>
                 <td><?php printf('%s', $donation->wpsd_donator_name); ?></td>
                 <td><?php printf('%s', $donation->wpsd_donator_email); ?></td>

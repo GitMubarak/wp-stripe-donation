@@ -5,6 +5,8 @@
  */
 class Wpsd_Front
 {
+	use HM_Currency;
+
 	private $wpsd_version;
 
 	public function __construct($version)
@@ -43,11 +45,13 @@ class Wpsd_Front
 		}
 		$wpsdGeneralSettings = stripslashes_deep(unserialize(get_option('wpsd_general_settings')));
 		if (is_array($wpsdGeneralSettings)) {
-			$wpsdPaymentTitle = !empty($wpsdGeneralSettings['wpsd_payment_title']) ? $wpsdGeneralSettings['wpsd_payment_title'] : "Donate Us";
-			$wpsdPaymentLogo = !empty($wpsdGeneralSettings['wpsd_payment_logo']) ? $wpsdGeneralSettings['wpsd_payment_logo'] : "";
+			$wpsdPaymentTitle = $wpsdGeneralSettings['wpsd_payment_title'];
+			$wpsdPaymentLogo = $wpsdGeneralSettings['wpsd_payment_logo'];
+			$wpsdDonateCurrency = $wpsdGeneralSettings['wpsd_donate_currency'];
 		} else {
 			$wpsdPaymentTitle = "Donate Us";
 			$wpsdPaymentLogo = "";
+			$wpsdDonateCurrency = "USD";
 		}
 		$wpsdImage = array();
 		$image = "";
@@ -62,7 +66,8 @@ class Wpsd_Front
 			'stripeSKey'	=> $wpsdSecretKey,
 			'image'			=> $image,
 			'ajaxurl' 		=> admin_url('admin-ajax.php'),
-			'title'			=> $wpsdPaymentTitle
+			'title'			=> $wpsdPaymentTitle,
+			'currency'		=> $wpsdDonateCurrency,
 		);
 		wp_localize_script($this->wpsd_assets_prefix . 'front-script', 'wpsdAdminScriptObj', $wpsdAdminArray);
 	}
@@ -98,6 +103,7 @@ class Wpsd_Front
 			$wpsdEmail = sanitize_email($_POST['email']);
 			$wpsdPhone = intval($_POST['phone']);
 			$wpsdAmount = intval($_POST['amount']);
+			$wpsdCurrency = sanitize_text_field($_POST['currency']);
 
 			require_once "Stripe/Stripe.php";
 			include(HMSD_PATH . '/Stripe/Stripe.php');
@@ -112,7 +118,7 @@ class Wpsd_Front
 				$charge = Stripe_Charge::create(
 					array(
 						"amount" => $wpsdAmount,
-						"currency" => "usd",
+						"currency" => $wpsdCurrency,
 						"card" => $token,
 						"description" => $wpsdName . " (" . $wpsdPhone . ") donated for " . $wpsdDonationFor
 					)
@@ -125,7 +131,7 @@ class Wpsd_Front
 				// Send the email if the charge successful.
 				$wpsdEmailTo = $wpsdDonationEmail;
 				$wpsdEmailSubject = $wpsdName . "(" . $wpsdPhone . ") donated for " . $wpsdDonationFor;
-				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Phone: " . $wpsdPhone . "<br>Email: " . $wpsdEmail . "<br>Amount: $" . substr($wpsdAmount, 0, -2) . "<br>For: " . $wpsdDonationFor;
+				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Phone: " . $wpsdPhone . "<br>Email: " . $wpsdEmail . "<br>Amount: " . substr($wpsdAmount, 0, -2) . $wpsdCurrency . "<br>For: " . $wpsdDonationFor;
 				$headers = array('Content-Type: text/html; charset=UTF-8');
 
 				wp_mail($wpsdEmailTo, $wpsdEmailSubject, $wpsdEmailMessage, $headers);

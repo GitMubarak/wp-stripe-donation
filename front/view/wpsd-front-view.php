@@ -1,21 +1,40 @@
 <?php
 $wpsdGeneralSettings = stripslashes_deep(unserialize(get_option('wpsd_general_settings')));
 if (is_array($wpsdGeneralSettings)) {
-	$wpsdDonationEmail = !empty($wpsdGeneralSettings['wpsd_donation_email']) ? $wpsdGeneralSettings['wpsd_donation_email'] : "";
-	$wpsdPaymentTitle = !empty($wpsdGeneralSettings['wpsd_payment_title']) ? $wpsdGeneralSettings['wpsd_payment_title'] : "Donation Tile";
-	$wpsdDonateButtonText = !empty($wpsdGeneralSettings['wpsd_donate_button_text']) ? $wpsdGeneralSettings['wpsd_donate_button_text'] : "Donate Now";
+    $wpsdDonationEmail = $wpsdGeneralSettings['wpsd_donation_email'];
+    $wpsdPaymentTitle = $wpsdGeneralSettings['wpsd_payment_title'];
+    $wpsdDonateButtonText = $wpsdGeneralSettings['wpsd_donate_button_text'];
+    $wpsdDonateCurrency = $wpsdGeneralSettings['wpsd_donate_currency'];
 } else {
-	$wpsdDonationEmail = "";
-	$wpsdPaymentTitle = "Donate Us";
-	$wpsdDonateButtonText = "Donate Now";
+    $wpsdDonationEmail = "";
+    $wpsdPaymentTitle = "Donate Us";
+    $wpsdDonateButtonText = "Donate Now";
+    $wpsdDonateCurrency = "USD";
+}
+
+//
+$wpsdTempSettings = stripslashes_deep(unserialize(get_option('wpsd_temp_settings')));
+if (is_array($wpsdTempSettings)) {
+    $wpsdFormBanner = $wpsdTempSettings['wpsd_form_banner'];
+    $wpsdSelectTemp = $wpsdTempSettings['wpsd_select_template'];
+} else {
+    $wpsdFormBanner = "";
+    $wpsdSelectTemp = 0;
 }
 ?>
-<div class="wpsd-master-wrapper wpsd-template-0" id="wpsd-wrap-all">
+<div class="wpsd-master-wrapper wpsd-template-<?php printf('%d', $wpsdSelectTemp); ?>" id="wpsd-wrap-all">
     <div class="wpsd-wrapper-header">
         <h2><?php esc_html_e('WP Stripe Donation', WPSD_TXT_DOMAIN); ?></h2>
     </div>
+    <?php
+    if (intval($wpsdFormBanner) > 0) {
+        echo wp_get_attachment_image($wpsdFormBanner, 'full', false, array('class' => 'wpsd-form-banner'));
+    }
+    ?>
     <div class="wpsd-wrapper-content">
-        <h2><?php echo esc_html__($wpsdPaymentTitle); ?></h2>
+        <fieldset id="el##" style="margin:0; padding:0; border:0; border-top:1px solid #CCC;">
+            <legend style="padding:0 20px; margin:0 auto;"><?php echo esc_html__($wpsdPaymentTitle); ?></legend>
+        </fieldset>
         <form action="" method="POST" id="wpsd-donation-form-id">
             <!-- Input section -->
             <label for="wpsd_donation_for"
@@ -45,28 +64,28 @@ if (is_array($wpsdGeneralSettings)) {
                     <div class="form-group">
                         <input type="radio" id="amount_1" name="wpsd_donate_amount"
                             value="<?php esc_attr_e('10', WPSD_TXT_DOMAIN); ?>" checked>
-                        <label for="amount_1">$10</label>
+                        <label for="amount_1">10 <?php echo esc_html($wpsdDonateCurrency); ?></label>
                     </div>
                 </li>
                 <li>
                     <div class="form-group">
                         <input type="radio" id="amount_2" name="wpsd_donate_amount"
                             value="<?php esc_attr_e('20', WPSD_TXT_DOMAIN); ?>">
-                        <label for="amount_2">$20</label>
+                        <label for="amount_2">20 <?php echo esc_html($wpsdDonateCurrency); ?></label>
                     </div>
                 </li>
                 <li>
                     <div class="form-group">
                         <input type="radio" id="amount_3" name="wpsd_donate_amount"
                             value="<?php esc_attr_e('50', WPSD_TXT_DOMAIN); ?>">
-                        <label for="amount_3">$50</label>
+                        <label for="amount_3">50 <?php echo esc_html($wpsdDonateCurrency); ?></label>
                     </div>
                 </li>
                 <li>
                     <div class="form-group">
                         <input type="radio" id="amount_4" name="wpsd_donate_amount"
                             value="<?php esc_attr_e('100', WPSD_TXT_DOMAIN); ?>">
-                        <label for="amount_4">$100</label>
+                        <label for="amount_4">100 <?php echo esc_html($wpsdDonateCurrency); ?></label>
                     </div>
                 </li>
                 <li>
@@ -77,17 +96,17 @@ if (is_array($wpsdGeneralSettings)) {
                 <li>
                     <div class="form-group">
                         <input id="wpsd_donate_other_amount" type="number" class="wpsd_donate_other_amount"
-                            name="wpsd_donate_other_amount">
+                            name="wpsd_donate_other_amount"> <?php echo esc_html($wpsdDonateCurrency); ?>
                     </div>
                 </li>
-
             </ul>
             <input type="submit" name="wpsd-donate-button" class="wpsd-donate-button"
                 value="<?php echo esc_attr($wpsdDonateButtonText); ?>">
         </form>
 
         <p class="wpsd-total-donation-today">
-            Total&nbsp;<span id="wpsd-total-donation-number">$0</span>&nbsp;Donation Today
+            Total&nbsp;<span id="wpsd-total-donation-number">0
+                <?php echo esc_html($wpsdDonateCurrency); ?></span>&nbsp;Donation Today
         </p>
         <span id="wpsd-donation-message" class="wpsd-alert">&nbsp;</span>
     </div>
