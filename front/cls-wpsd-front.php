@@ -27,6 +27,8 @@ class Wpsd_Front
 		if (!wp_script_is('jquery')) {
 			wp_enqueue_script('jquery');
 		}
+
+		wp_enqueue_script('checkout-stripe-js', '//checkout.stripe.com/checkout.js');
 		wp_enqueue_script(
 			$this->wpsd_assets_prefix . 'front-script',
 			WPSD_ASSETS . 'js/' . $this->wpsd_assets_prefix . 'front-script.js',
@@ -34,7 +36,6 @@ class Wpsd_Front
 			$this->wpsd_version,
 			TRUE
 		);
-		wp_enqueue_script('checkout-stripe-js', '//checkout.stripe.com/checkout.js');
 		$wpsdKeySettings = stripslashes_deep(unserialize(get_option('wpsd_key_settings')));
 		if (is_array($wpsdKeySettings)) {
 			$wpsdPrimaryKey = !empty($wpsdKeySettings['wpsd_private_key']) ? $wpsdKeySettings['wpsd_private_key'] : "";
@@ -95,7 +96,7 @@ class Wpsd_Front
 		*/
 		if (
 			!empty($_POST['token']) && !empty($_POST['wpsdSecretKey']) && !empty($_POST['email']) && !empty($_POST['amount']) && !empty($_POST['name']) &&
-			!empty($_POST['phone']) && !empty($_POST['donation_for'])
+			!empty($_POST['donation_for'])
 		) {
 
 			$wpsdDonationFor = sanitize_text_field($_POST['donation_for']);
@@ -129,12 +130,14 @@ class Wpsd_Front
 					$wpsdDonationEmail = !empty($wpsdGeneralSettings['wpsd_donation_email']) ? $wpsdGeneralSettings['wpsd_donation_email'] : "";
 				}
 				// Send the email if the charge successful.
-				$wpsdEmailTo = $wpsdDonationEmail;
-				$wpsdEmailSubject = $wpsdName . "(" . $wpsdPhone . ") donated for " . $wpsdDonationFor;
-				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Phone: " . $wpsdPhone . "<br>Email: " . $wpsdEmail . "<br>Amount: " . substr($wpsdAmount, 0, -2) . $wpsdCurrency . "<br>For: " . $wpsdDonationFor;
+				$wpsdEmailSubject = "New Donated for " . $wpsdDonationFor;
+				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Email: " . $wpsdEmail . "<br>Amount: " . substr($wpsdAmount, 0, -2) . $wpsdCurrency . "<br>For: " . $wpsdDonationFor . "<br>";
+				if ($wpsdPhone) {
+					$wpsdEmailMessage .= "Phone: " . $wpsdPhone . "<br>";
+				}
 				$headers = array('Content-Type: text/html; charset=UTF-8');
 
-				wp_mail($wpsdEmailTo, $wpsdEmailSubject, $wpsdEmailMessage, $headers);
+				wp_mail($wpsdDonationEmail, $wpsdEmailSubject, $wpsdEmailMessage, $headers);
 				$wpdb->query('INSERT INTO ' . $tableData . ' (
 															wpsd_donation_for,
 															wpsd_donator_name,

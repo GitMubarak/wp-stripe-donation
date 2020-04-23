@@ -17,6 +17,7 @@
         var wpsdHandler = StripeCheckout.configure({
             key: wpsdAdminScriptObj.stripePKey,
             image: wpsdAdminScriptObj.image,
+            currency: wpsdAdminScriptObj.currency,
             token: function(token) {
 
                 $.ajax({
@@ -64,11 +65,13 @@
                 $("#wpsd_donator_email").focus();
                 return false;
             }
+            /*
             if ($("#wpsd_donator_phone").val() == "") {
                 $('#wpsd-donation-message').show('slow').addClass('error').html('Please Enter Donator Phone');
                 $("#wpsd_donator_phone").focus();
                 return false;
             }
+            */
             if ($("#wpsd_donate_other_amount").val() != "") {
                 wpsdDonateAmount = $("#wpsd_donate_other_amount").val() + "00";
             } else {
@@ -95,7 +98,7 @@
                     name: wpsdAdminScriptObj.title,
                     description: 'Donation for ' + $("#wpsd_donation_for").val(),
                     amount: wpsdDonateAmount,
-                    email: $("#wpsd_donator_email").val()
+                    email: $("#wpsd_donator_email").val(),
                 });
             }
             e.preventDefault();
