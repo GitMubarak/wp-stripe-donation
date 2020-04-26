@@ -3,11 +3,13 @@ $wpsdGeneralSettings = stripslashes_deep(unserialize(get_option('wpsd_general_se
 if (is_array($wpsdGeneralSettings)) {
     $wpsdDonationEmail = $wpsdGeneralSettings['wpsd_donation_email'];
     $wpsdPaymentTitle = $wpsdGeneralSettings['wpsd_payment_title'];
+    $wpsdDonationOptions = $wpsdGeneralSettings['wpsd_donation_options'];
     $wpsdDonateButtonText = $wpsdGeneralSettings['wpsd_donate_button_text'];
     $wpsdDonateCurrency = $wpsdGeneralSettings['wpsd_donate_currency'];
 } else {
     $wpsdDonationEmail = "";
     $wpsdPaymentTitle = "Donate Us";
+    $wpsdDonationOptions = "";
     $wpsdDonateButtonText = "Donate Now";
     $wpsdDonateCurrency = "USD";
 }
@@ -21,6 +23,9 @@ if (is_array($wpsdTempSettings)) {
     $wpsdFormBanner = "";
     $wpsdSelectTemp = 0;
 }
+
+
+$wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOptions) : array();
 ?>
 <div class="wpsd-master-wrapper wpsd-template-<?php printf('%d', $wpsdSelectTemp); ?>" id="wpsd-wrap-all">
     <div class="wpsd-wrapper-header">
@@ -39,8 +44,17 @@ if (is_array($wpsdTempSettings)) {
             <!-- Input section -->
             <label for="wpsd_donation_for"
                 class="wpsd-donation-form-label"><?php esc_html_e('Donation For:', WPSD_TXT_DOMAIN); ?></label>
-            <input type="text" name="wpsd_donation_for" id="wpsd_donation_for" class="wpsd-text-field"
-                placeholder="<?php esc_attr_e('Donation For', WPSD_TXT_DOMAIN); ?>">
+            <select name="wpsd_donation_for" id="wpsd_donation_for" class="wpsd-text-field">
+                <option value="">-- Select One --</option>
+                <?php
+                if (count($wpsdDonOpVals) > 0) {
+                    foreach ($wpsdDonOpVals as $wpsdDonOpVal) {
+                ?>
+                <option value="<?php echo esc_attr(trim($wpsdDonOpVal)); ?>">
+                    <?php echo esc_html(trim($wpsdDonOpVal)); ?></option>
+                <?php }
+                } ?>
+            </select>
             <!-- Input section -->
             <label for="wpsd_donator_name"
                 class="wpsd-donation-form-label"><?php esc_html_e('Donator Name:', WPSD_TXT_DOMAIN); ?></label>

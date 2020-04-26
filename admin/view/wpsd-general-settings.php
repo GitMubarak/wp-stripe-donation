@@ -4,6 +4,7 @@ if (isset($_POST['updateGeneralSettings'])) {
     $wpsdGeneralSettingsInfo = array(
         'wpsd_donation_email' => (sanitize_email($_POST['wpsd_donation_email']) != '') ? sanitize_email($_POST['wpsd_donation_email']) : '',
         'wpsd_payment_title' => (sanitize_text_field($_POST['wpsd_payment_title']) != '') ? sanitize_text_field($_POST['wpsd_payment_title']) : '',
+        'wpsd_donation_options' => (sanitize_textarea_field($_POST['wpsd_donation_options']) != '') ? sanitize_textarea_field($_POST['wpsd_donation_options']) : '',
         'wpsd_donate_button_text' => (sanitize_text_field($_POST['wpsd_donate_button_text']) != '') ? sanitize_text_field($_POST['wpsd_donate_button_text']) : '',
         'wpsd_donate_currency' => (sanitize_text_field($_POST['wpsd_donate_currency']) != '') ? sanitize_text_field($_POST['wpsd_donate_currency']) : 'USD',
         'wpsd_payment_logo' => (sanitize_file_name($_POST['wpsd_payment_logo']) != '') ? sanitize_file_name($_POST['wpsd_payment_logo']) : ''
@@ -14,12 +15,14 @@ $wpsdGeneralSettings = stripslashes_deep(unserialize(get_option('wpsd_general_se
 if (is_array($wpsdGeneralSettings)) {
     $wpsdDonationEmail = $wpsdGeneralSettings['wpsd_donation_email'];
     $wpsdPaymentTitle = $wpsdGeneralSettings['wpsd_payment_title'];
+    $wpsdDonationOptions = $wpsdGeneralSettings['wpsd_donation_options'];
     $wpsdDonateButtonText = $wpsdGeneralSettings['wpsd_donate_button_text'];
     $wpsdDonateCurrency = $wpsdGeneralSettings['wpsd_donate_currency'];
     $wpsdPaymentLogo = $wpsdGeneralSettings['wpsd_payment_logo'];
 } else {
     $wpsdDonationEmail = "";
     $wpsdPaymentTitle = "";
+    $wpsdDonationOptions = "";
     $wpsdDonateButtonText = "";
     $wpsdPaymentLogo = "";
     $wpsdDonateCurrency = "USD";
@@ -43,16 +46,28 @@ if (is_array($wpsdGeneralSettings)) {
                 <td>
                     <input type="text" name="wpsd_donation_email" id="wpsd_donation_email" class="regular-text"
                         value="<?php echo esc_attr($wpsdDonationEmail); ?>" />
+                    <code>Donation information will send to this email.</code>
                 </td>
             </tr>
             <tr class="wpsd_payment_title">
                 <th scope="row">
-                    <label
-                        for="wpsd_payment_title"><?php esc_html_e('Stripe Donation Title:', WPSD_TXT_DOMAIN); ?></label>
+                    <label for="wpsd_payment_title"><?php esc_html_e('Donation Title:', WPSD_TXT_DOMAIN); ?></label>
                 </th>
                 <td>
                     <input type="text" name="wpsd_payment_title" id="wpsd_payment_title" class="regular-text"
                         value="<?php echo esc_attr($wpsdPaymentTitle); ?>" />
+                </td>
+            </tr>
+            <tr class="wpsd_donation_options">
+                <th scope="row">
+                    <label
+                        for="wpsd_donation_options"><?php esc_html_e('Donation Options:', WPSD_TXT_DOMAIN); ?></label>
+                </th>
+                <td>
+                    <textarea cols="40" style="min-height:100px;" name="wpsd_donation_options" class="regular-text"
+                        id="wpsd_donation_options"><?php echo esc_html($wpsdDonationOptions); ?></textarea>
+                    <br>
+                    <code>Use comma "," separated values</code>
                 </td>
             </tr>
             <tr class="wpsd_donate_button_text">
@@ -84,7 +99,7 @@ if (is_array($wpsdGeneralSettings)) {
             </tr>
             <tr class="wpsd_payment_logo">
                 <th scope="row">
-                    <label for="wpsd_payment_logo"><?php esc_html_e('Stripe Payment Logo:', WPSD_TXT_DOMAIN); ?></label>
+                    <label for="wpsd_payment_logo"><?php esc_html_e('Payment Modal Logo:', WPSD_TXT_DOMAIN); ?></label>
                 </th>
                 <td>
                     <input type="hidden" name="wpsd_payment_logo" id="wpsd_payment_logo"

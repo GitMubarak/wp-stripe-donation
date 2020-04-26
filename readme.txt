@@ -115,6 +115,12 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 == Changelog ==
 
+= 1.2 =
+* Donation Options features added
+* Hide Stripe secret key visibiliy
+* Currency showing issue on payment modal fixed
+* Phone number mendatory removed
+
 = 1.1 =
 * Currency option added
 * Template settings submenu added

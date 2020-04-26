@@ -54,6 +54,16 @@
         width: 55px;
         text-align: right;
     }
+    
+    #wpsd_shortcode {
+        padding: 10px;
+        text-align: center;
+        border: 2px dotted #FF0000;
+        background: #FFAA2B;
+        font-size: 18px;
+        font-weight: 600;
+        max-width: 430px;
+    }
     /* template selector section */
     
     .wpsd-template-selector {
