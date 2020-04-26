@@ -130,7 +130,7 @@ class Wpsd_Front
 					$wpsdDonationEmail = !empty($wpsdGeneralSettings['wpsd_donation_email']) ? $wpsdGeneralSettings['wpsd_donation_email'] : "";
 				}
 				// Send the email if the charge successful.
-				$wpsdEmailSubject = "New Donated for " . $wpsdDonationFor;
+				$wpsdEmailSubject = "New Donation for " . $wpsdDonationFor;
 				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Email: " . $wpsdEmail . "<br>Amount: " . substr($wpsdAmount, 0, -2) . $wpsdCurrency . "<br>For: " . $wpsdDonationFor . "<br>";
 				if ($wpsdPhone) {
 					$wpsdEmailMessage .= "Phone: " . $wpsdPhone . "<br>";

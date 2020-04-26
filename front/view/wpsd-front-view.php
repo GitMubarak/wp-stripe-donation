@@ -118,10 +118,11 @@ $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOption
                 value="<?php echo esc_attr($wpsdDonateButtonText); ?>">
         </form>
 
-        <p class="wpsd-total-donation-today">
+        <!-- p class="wpsd-total-donation-today">
             Total&nbsp;<span id="wpsd-total-donation-number">0
-                <?php echo esc_html($wpsdDonateCurrency); ?></span>&nbsp;Donation Today
-        </p>
+                <?php //echo esc_html($wpsdDonateCurrency); 
+                ?></span>&nbsp;Donation Today
+        </p -->
         <span id="wpsd-donation-message" class="wpsd-alert">&nbsp;</span>
     </div>
 </div>
