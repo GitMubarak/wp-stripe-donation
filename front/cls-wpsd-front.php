@@ -107,9 +107,9 @@ class Wpsd_Front
 			$wpsdCurrency = sanitize_text_field($_POST['currency']);
 
 			require_once "Stripe/Stripe.php";
-			include(HMSD_PATH . '/Stripe/Stripe.php');
+			include(WPSD_PATH . '/Stripe/Stripe.php');
 			$stripe_key = sanitize_text_field($_POST['wpsdSecretKey']);
-			Stripe::setApiKey($stripe_key);
+			Stripe::setApiKey(base64_decode($stripe_key));
 
 			// Credit card details
 			$token = sanitize_text_field($_POST['token']);

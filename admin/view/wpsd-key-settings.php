@@ -4,14 +4,14 @@ $wpsdKeyShowMessage = false;
 if (isset($_POST['updateKeySettings'])) {
      $wpsdKeySettingsInfo = array(
           'wpsd_private_key' => (!empty($_POST['wpsd_private_key']) && (sanitize_text_field($_POST['wpsd_private_key']) != '')) ? sanitize_text_field($_POST['wpsd_private_key']) : '',
-          'wpsd_secret_key'  => (!empty($_POST['wpsd_secret_key']) && (sanitize_text_field($_POST['wpsd_secret_key']) != '')) ? sanitize_text_field($_POST['wpsd_secret_key']) : ''
+          'wpsd_secret_key'  => (!empty($_POST['wpsd_secret_key']) && (sanitize_text_field($_POST['wpsd_secret_key']) != '')) ? sanitize_text_field(base64_encode($_POST['wpsd_secret_key'])) : '',
      );
      $wpsdKeyShowMessage = update_option('wpsd_key_settings', serialize($wpsdKeySettingsInfo));
 }
 $wpsdKeySettings = stripslashes_deep(unserialize(get_option('wpsd_key_settings')));
 if (is_array($wpsdKeySettings)) {
      $wpsdPrivateKey = !empty($wpsdKeySettings['wpsd_private_key']) ? $wpsdKeySettings['wpsd_private_key'] : "";
-     $wpsdSecretKey = !empty($wpsdKeySettings['wpsd_secret_key']) ? $wpsdKeySettings['wpsd_secret_key'] : "";
+     $wpsdSecretKey = !empty($wpsdKeySettings['wpsd_secret_key']) ? base64_decode($wpsdKeySettings['wpsd_secret_key']) : "";
 } else {
      $wpsdPrivateKey = "";
      $wpsdSecretKey = "";
