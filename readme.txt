@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/mhmrajib/2
 Tags: charity, donate, donation, donations, stripe
 Requires at least: 4.6
 Tested up to: 5.4.1
-Stable tag: 1.3
+Stable tag: 1.4
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -32,14 +32,20 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 * Minimal settings required
 * Accept donation via Stripe payment
 * Option for Donation info email where instant email sent with donation info when donors donate
-* Donation Title changing option added
+* Donation Title changing option
 * Donation Button Text changing option included
 * Stripe Payment Logo Changing option available (When Stripe PopUp occurs)
 * View donations list in your WordPress admin panel
 * Super Easy and Fast
-* Currency option added (New)
-* Donation form banner upload option added (New)
-* 5 colorful template added in template settings (New)
+* Currency option
+* Donation form banner upload option
+* 5 colorful template added in template settings
+* Display Header option (New)
+* Donation For Label Option (New)
+* Donator Name Label Option (New)
+* Donator Email Label Option (New)
+* Donator Phone Label Option (New)
+* Donate Amount Label Option (New)
 
 
 ➡️ Useage of Shortcode:⬅️
@@ -114,6 +120,16 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 
 == Changelog ==
+
+= 1.4 =
+* Display Header option added
+* Donation For Label Option added
+* Donator Name Label Option added
+* Donator Email Label Option added
+* Donator Phone Label Option added
+* Donate Amount Label Option added
+* Amount list style disabled
+* Other amount field width fixed to 100px
 
 = 1.3 =
 * Security applied to key

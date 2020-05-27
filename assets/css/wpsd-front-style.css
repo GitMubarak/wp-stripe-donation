@@ -133,15 +133,16 @@ img.wpsd-form-banner {
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content ul#wpsd_donate_amount li {
-    border: 0px solid #000;
     padding-left: 10px;
     padding-right: 10px;
+    list-style: none!important;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
     border: 1px solid #808080;
     margin: 0;
     padding: 0 4px;
+    max-width: 100px!important;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content .wpsd-donate-button {
