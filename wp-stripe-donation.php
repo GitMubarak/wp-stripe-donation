@@ -11,10 +11,10 @@
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-if (!defined('WPINC')) {
+if ( ! defined('WPINC') ) {
     die;
 }
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit;
 }
 
@@ -27,7 +27,7 @@ define('WPSD_SLUG', plugin_basename(__FILE__));
 define('WPSD_PRFX', 'wpsd_');
 define('WPSD_CLS_PRFX', 'cls-wpsd-');
 define('WPSD_TXT_DOMAIN', 'wp-stripe-donation');
-define('WPSD_VERSION', '1.4');
+define('WPSD_VERSION', '1.5');
 define('WPSD_TABLE', $wpdb->prefix . 'wpsd_stripe_donation');
 
 require_once WPSD_PATH . 'inc/' . WPSD_CLS_PRFX . 'master.php';
