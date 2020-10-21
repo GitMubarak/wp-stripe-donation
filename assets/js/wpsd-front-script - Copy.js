@@ -14,8 +14,6 @@
             this.value = this.value.replace(/[^0-9\.]/g, '');
         });
 
-
-
         var wpsdHandler = StripeCheckout.configure({
             key: wpsdAdminScriptObj.stripePKey,
             image: wpsdAdminScriptObj.image,
@@ -75,8 +73,7 @@
             }
             */
             if ($("#wpsd_donate_other_amount").val() != "") {
-                wpsdDonateAmount = $("#wpsd_donate_other_amount").val() * 100;
-                alert(wpsdDonateAmount);
+                wpsdDonateAmount = $("#wpsd_donate_other_amount").val() + "00";
             } else {
                 var wpsdRadioVal = $(".wpsd-wrapper-content #wpsd_donate_amount input[name='wpsd_donate_amount']:checked").val();
                 if (wpsdRadioVal !== undefined) {
