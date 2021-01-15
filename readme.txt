@@ -37,15 +37,17 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 * Stripe Payment Logo Changing option available (When Stripe PopUp occurs)
 * View donations list in your WordPress admin panel
 * Super Easy and Fast
-* Currency option
+* Currency changing option
 * Donation form banner upload option
 * 5 colorful template added in template settings
-* Display Header option (New)
-* Donation For Label Option (New)
-* Donator Name Label Option (New)
-* Donator Email Label Option (New)
-* Donator Phone Label Option (New)
-* Donate Amount Label Option (New)
+* Display Banner option
+* Display Header option
+* Donation For Label Option
+* Donator Name Label Option
+* Donator Email Label Option
+* Donator Phone Label Option
+* Donate Amount Label Option
+* Set various donate amount from admin panel like 100, 200, 500 etc.
 
 
 ➡️ Useage of Shortcode:⬅️
@@ -128,6 +130,8 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 == Changelog ==
 
 = 1.5 =
+* Donate amount option added
+* Display Banner option added
 * Display Header option added
 
 = 1.4 =

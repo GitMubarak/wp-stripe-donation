@@ -4,6 +4,7 @@ if( isset( $_POST['updateTempSettings'] ) ) {
 
     $wpsdTempSettingsInfo = array(
         'wpsd_select_template'      => ( filter_var( $_POST['wpsd_select_template'], FILTER_SANITIZE_STRING ) ) ? $_POST['wpsd_select_template'] : 0,
+        'wpsd_display_banner'       => isset( $_POST['wpsd_display_banner'] ) && filter_var( $_POST['wpsd_display_banner'], FILTER_SANITIZE_NUMBER_INT ) ? $_POST['wpsd_display_banner'] : '',
         'wpsd_form_banner'          => ( sanitize_file_name( $_POST['wpsd_form_banner'] ) != '' ) ? sanitize_file_name( $_POST['wpsd_form_banner'] ) : '',
         'wpsd_display_header'       => isset( $_POST['wpsd_display_header'] ) && filter_var( $_POST['wpsd_display_header'], FILTER_SANITIZE_NUMBER_INT ) ? $_POST['wpsd_display_header'] : '',
         'wpsd_donation_for_label'   => ( sanitize_text_field( $_POST['wpsd_donation_for_label'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donation_for_label'] ) : 'Donation For',
@@ -25,6 +26,8 @@ if ( is_array( $wpsdTempSettings ) ) {
     $wpsdSelectTemp = 0;
     $wpsdFormBanner = '';
 }
+
+$wpsd_display_banner        = isset( $wpsdTempSettings['wpsd_display_banner'] ) ? $wpsdTempSettings['wpsd_display_banner'] : '';
 $wpsd_display_header        = isset( $wpsdTempSettings['wpsd_display_header'] ) ? $wpsdTempSettings['wpsd_display_header'] : '';
 $wpsd_donation_for_label    = isset( $wpsdTempSettings['wpsd_donation_for_label'] ) ? $wpsdTempSettings['wpsd_donation_for_label'] : 'Donation For';
 $wpsd_donator_name_label    = isset( $wpsdTempSettings['wpsd_donator_name_label'] ) ? $wpsdTempSettings['wpsd_donator_name_label'] : 'Donator Name';
@@ -57,6 +60,14 @@ $wpsd_donate_amount_label   = isset( $wpsdTempSettings['wpsd_donate_amount_label
                         </div>
                         <?php endfor; ?>
                     </div>
+                </td>
+            </tr>
+            <tr class="wpsd_display_banner">
+                <th scope="row">
+                    <label for="wpsd_display_banner"><?php esc_html_e('Display Banner:', WPSD_TXT_DOMAIN); ?></label>
+                </th>
+                <td>
+                    <input type="checkbox" name="wpsd_display_banner" class="wpsd_display_banner" value="1" <?php if( '1' === $wpsd_display_banner ) { echo 'checked'; } ?> >
                 </td>
             </tr>
             <tr class="wpsd_form_banner">

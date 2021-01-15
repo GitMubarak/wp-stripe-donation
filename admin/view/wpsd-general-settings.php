@@ -2,12 +2,13 @@
 $wpsdGeneralShowMessage = false;
 if (isset($_POST['updateGeneralSettings'])) {
     $wpsdGeneralSettingsInfo = array(
-        'wpsd_donation_email' => (sanitize_email($_POST['wpsd_donation_email']) != '') ? sanitize_email($_POST['wpsd_donation_email']) : '',
-        'wpsd_payment_title' => (sanitize_text_field($_POST['wpsd_payment_title']) != '') ? sanitize_text_field($_POST['wpsd_payment_title']) : '',
-        'wpsd_donation_options' => (sanitize_textarea_field($_POST['wpsd_donation_options']) != '') ? sanitize_textarea_field($_POST['wpsd_donation_options']) : '',
-        'wpsd_donate_button_text' => (sanitize_text_field($_POST['wpsd_donate_button_text']) != '') ? sanitize_text_field($_POST['wpsd_donate_button_text']) : '',
-        'wpsd_donate_currency' => (sanitize_text_field($_POST['wpsd_donate_currency']) != '') ? sanitize_text_field($_POST['wpsd_donate_currency']) : 'USD',
-        'wpsd_payment_logo' => (sanitize_file_name($_POST['wpsd_payment_logo']) != '') ? sanitize_file_name($_POST['wpsd_payment_logo']) : ''
+        'wpsd_donation_email'       => ( sanitize_email( $_POST['wpsd_donation_email'] ) != '' ) ? sanitize_email( $_POST['wpsd_donation_email'] ) : '',
+        'wpsd_payment_title'        => ( sanitize_text_field( $_POST['wpsd_payment_title'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_payment_title'] ) : '',
+        'wpsd_donation_options'     => ( sanitize_textarea_field( $_POST['wpsd_donation_options'] ) != '' ) ? sanitize_textarea_field( $_POST['wpsd_donation_options'] ) : '',
+        'wpsd_donation_values'      => ( sanitize_textarea_field( $_POST['wpsd_donation_values'] ) != '' ) ? sanitize_textarea_field( $_POST['wpsd_donation_values'] ) : '',
+        'wpsd_donate_button_text'   => ( sanitize_text_field( $_POST['wpsd_donate_button_text'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donate_button_text'] ) : '',
+        'wpsd_donate_currency'      => ( sanitize_text_field( $_POST['wpsd_donate_currency'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donate_currency'] ) : 'USD',
+        'wpsd_payment_logo'         => ( sanitize_file_name( $_POST['wpsd_payment_logo'] ) != '' ) ? sanitize_file_name( $_POST['wpsd_payment_logo'] ) : ''
     );
     $wpsdGeneralShowMessage = update_option('wpsd_general_settings', serialize($wpsdGeneralSettingsInfo));
 }
@@ -27,6 +28,8 @@ if (is_array($wpsdGeneralSettings)) {
     $wpsdPaymentLogo = "";
     $wpsdDonateCurrency = "USD";
 }
+
+$wpsd_donation_values        = isset( $wpsdGeneralSettings['wpsd_donation_values'] ) ? $wpsdGeneralSettings['wpsd_donation_values'] : '';
 ?>
 <div id="wpsd-wrap-all" class="wrap">
     <div class="settings-banner">
@@ -61,13 +64,25 @@ if (is_array($wpsdGeneralSettings)) {
             <tr class="wpsd_donation_options">
                 <th scope="row">
                     <label
-                        for="wpsd_donation_options"><?php esc_html_e('Donation Options:', WPSD_TXT_DOMAIN); ?></label>
+                        for="wpsd_donation_options"><?php esc_html_e('Donation For Options:', WPSD_TXT_DOMAIN); ?></label>
                 </th>
                 <td>
                     <textarea cols="40" style="min-height:100px;" name="wpsd_donation_options" class="regular-text"
                         id="wpsd_donation_options"><?php echo esc_html($wpsdDonationOptions); ?></textarea>
                     <br>
-                    <code>Use comma "," separated values</code>
+                    <code>Use comma "," separated values like: Option-1, Option-2</code>
+                </td>
+            </tr>
+            <tr class="wpsd_donation_values">
+                <th scope="row">
+                    <label
+                        for="wpsd_donation_values"><?php esc_html_e('Donation Values:', WPSD_TXT_DOMAIN); ?></label>
+                </th>
+                <td>
+                    <textarea cols="40" style="min-height:100px;" name="wpsd_donation_values" class="regular-text"
+                        id="wpsd_donation_values"><?php echo esc_html($wpsd_donation_values); ?></textarea>
+                    <br>
+                    <code>Use comma "," separated values like: 100,150,200</code>
                 </td>
             </tr>
             <tr class="wpsd_donate_button_text">

@@ -14,8 +14,11 @@ if (is_array($wpsdGeneralSettings)) {
     $wpsdDonateCurrency = "USD";
 }
 
+$wpsd_donation_values   = isset( $wpsdGeneralSettings['wpsd_donation_values'] ) ? explode( ',', $wpsdGeneralSettings['wpsd_donation_values'] ) : array();
+
 //
 $wpsdTempSettings = stripslashes_deep( unserialize( get_option('wpsd_temp_settings') ) );
+
 if (is_array($wpsdTempSettings)) {
     $wpsdFormBanner = $wpsdTempSettings['wpsd_form_banner'];
     $wpsdSelectTemp = $wpsdTempSettings['wpsd_select_template'];
@@ -24,11 +27,12 @@ if (is_array($wpsdTempSettings)) {
     $wpsdSelectTemp = 0;
 }
 
-$wpsd_display_header = isset( $wpsdTempSettings['wpsd_display_header'] ) ? $wpsdTempSettings['wpsd_display_header'] : '';
-$wpsd_donation_for_label = isset( $wpsdTempSettings['wpsd_donation_for_label'] ) ? $wpsdTempSettings['wpsd_donation_for_label'] : 'Donation For';
-$wpsd_donator_name_label = isset( $wpsdTempSettings['wpsd_donator_name_label'] ) ? $wpsdTempSettings['wpsd_donator_name_label'] : 'Donator Name';
-$wpsd_donator_email_label = isset( $wpsdTempSettings['wpsd_donator_email_label'] ) ? $wpsdTempSettings['wpsd_donator_email_label'] : 'Donator Email';
-$wpsd_donator_phone_label = isset( $wpsdTempSettings['wpsd_donator_phone_label'] ) ? $wpsdTempSettings['wpsd_donator_phone_label'] : 'Donator Phone';
+$wpsd_display_banner        = isset( $wpsdTempSettings['wpsd_display_banner'] ) ? $wpsdTempSettings['wpsd_display_banner'] : '';
+$wpsd_display_header        = isset( $wpsdTempSettings['wpsd_display_header'] ) ? $wpsdTempSettings['wpsd_display_header'] : '';
+$wpsd_donation_for_label    = isset( $wpsdTempSettings['wpsd_donation_for_label'] ) ? $wpsdTempSettings['wpsd_donation_for_label'] : 'Donation For';
+$wpsd_donator_name_label    = isset( $wpsdTempSettings['wpsd_donator_name_label'] ) ? $wpsdTempSettings['wpsd_donator_name_label'] : 'Donator Name';
+$wpsd_donator_email_label   = isset( $wpsdTempSettings['wpsd_donator_email_label'] ) ? $wpsdTempSettings['wpsd_donator_email_label'] : 'Donator Email';
+$wpsd_donator_phone_label   = isset( $wpsdTempSettings['wpsd_donator_phone_label'] ) ? $wpsdTempSettings['wpsd_donator_phone_label'] : 'Donator Phone';
 $wpsd_donate_amount_label   = isset( $wpsdTempSettings['wpsd_donate_amount_label'] ) ? $wpsdTempSettings['wpsd_donate_amount_label'] : 'Donate Amount';
 
 $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOptions) : array();
@@ -40,8 +44,10 @@ $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOption
         </div>
     <?php } ?>
     <?php
-    if( intval( $wpsdFormBanner ) > 0 ) {
-        echo wp_get_attachment_image( $wpsdFormBanner, 'full', false, array('class' => 'wpsd-form-banner') );
+    if( '1' === $wpsd_display_banner ) {
+        if( intval( $wpsdFormBanner ) > 0 ) {
+            echo wp_get_attachment_image( $wpsdFormBanner, 'full', false, array('class' => 'wpsd-form-banner') );
+        }
     }
     ?>
     <div class="wpsd-wrapper-content">
@@ -82,34 +88,23 @@ $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOption
             <label for="wpsd_donate_amount"
                 class="wpsd-donation-form-label"><?php echo esc_html( $wpsd_donate_amount_label ); ?>:</label>
             <ul id="wpsd_donate_amount">
-                <li>
-                    <div class="form-group">
-                        <input type="radio" id="amount_1" name="wpsd_donate_amount"
-                            value="<?php esc_attr_e('10', WPSD_TXT_DOMAIN); ?>" checked>
-                        <label for="amount_1">10 <?php echo esc_html($wpsdDonateCurrency); ?></label>
-                    </div>
-                </li>
-                <li>
-                    <div class="form-group">
-                        <input type="radio" id="amount_2" name="wpsd_donate_amount"
-                            value="<?php esc_attr_e('20', WPSD_TXT_DOMAIN); ?>">
-                        <label for="amount_2">20 <?php echo esc_html($wpsdDonateCurrency); ?></label>
-                    </div>
-                </li>
-                <li>
-                    <div class="form-group">
-                        <input type="radio" id="amount_3" name="wpsd_donate_amount"
-                            value="<?php esc_attr_e('50', WPSD_TXT_DOMAIN); ?>">
-                        <label for="amount_3">50 <?php echo esc_html($wpsdDonateCurrency); ?></label>
-                    </div>
-                </li>
-                <li>
-                    <div class="form-group">
-                        <input type="radio" id="amount_4" name="wpsd_donate_amount"
-                            value="<?php esc_attr_e('100', WPSD_TXT_DOMAIN); ?>">
-                        <label for="amount_4">100 <?php echo esc_html($wpsdDonateCurrency); ?></label>
-                    </div>
-                </li>
+                <?php
+                if( count( $wpsd_donation_values ) > 0 ) {
+                    foreach( $wpsd_donation_values as $wpsdDonationVal ) {
+                        if( '' !== $wpsdDonationVal ) {
+                    ?>
+                    <li>
+                        <div class="form-group">
+                            <input type="radio" id="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>" name="wpsd_donate_amount"
+                                value="<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>">
+                            <label for="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>"><?php echo esc_html( trim( $wpsdDonationVal ) ); ?> <?php echo esc_html($wpsdDonateCurrency); ?></label>
+                        </div>
+                    </li>
+                    <?php
+                        } 
+                    }
+                } 
+                ?>
                 <li>
                     <div class="form-group">
                         / Other Amount:
