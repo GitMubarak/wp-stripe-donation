@@ -6,12 +6,20 @@
     var wpsdDonateAmount = 0;
 
     if (typeof(StripeCheckout) !== "undefined") {
+
         $("#wpsd-donation-form-id input[type='radio']").on("click", function() {
-            $("#wpsd_donate_other_amount").val("");
+
+            $('#wpsd_donate_other_amount').val('');
+
         });
-        $("#wpsd_donate_other_amount").on("keyup", function() {
+
+        $('#wpsd_donate_other_amount').on('keyup', function() {
+
             $("#wpsd-donation-form-id input[type='radio']").prop("checked", false);
-            this.value = this.value.replace(/[^0-9\.]/g, '');
+
+            //this.value = this.value.replace(/[^0-9\.]/g, '');
+            this.value = this.value.replace(/^[0-9]+\.?[0-9]*$/g, '');
+
         });
 
 
@@ -76,7 +84,7 @@
             */
             if ($("#wpsd_donate_other_amount").val() != "") {
                 wpsdDonateAmount = $("#wpsd_donate_other_amount").val() * 100;
-                alert(wpsdDonateAmount);
+                //alert(wpsdDonateAmount);
             } else {
                 var wpsdRadioVal = $(".wpsd-wrapper-content #wpsd_donate_amount input[name='wpsd_donate_amount']:checked").val();
                 if (wpsdRadioVal !== undefined) {
