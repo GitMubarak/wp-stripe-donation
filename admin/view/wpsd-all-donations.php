@@ -9,7 +9,7 @@ if (is_array($wpsdGeneralSettings)) {
 ?>
 
 <div id="wpsd-wrap-all" class="wrap">
-    <h2><?php esc_html_e('List of all donations', WPSD_TXT_DOMAIN); ?></h2><br>
+    <h2><?php esc_html_e('Donations Information', WPSD_TXT_DOMAIN); ?></h2><br>
     <table class="wp-list-table widefat fixed striped posts" cellspacing="0" id="wpc_data_table">
         <thead>
             <tr>

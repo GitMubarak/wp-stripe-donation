@@ -16,14 +16,17 @@
 
 .wpsd-alert.success {
     background-color: #6ABD6E;
+    display: inline-block !important;
 }
 
 .wpsd-alert.error {
     background-color: #F66358;
+    display: inline-block !important;
 }
 
 .wpsd-alert.warning {
     background-color: #FFAA2B;
+    display: inline-block !important;
 }
 
 
@@ -112,7 +115,8 @@ img.wpsd-form-banner {
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content .wpsd-text-field:focus {
-    box-shadow: 0 0px 20px #808080;
+    /*box-shadow: 0 0px 20px #808080; */
+    border: 1px solid red!important;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content ul#wpsd_donate_amount {
@@ -304,9 +308,12 @@ Template 3
     border-color: #1E90FF;
 }
 
+
+/*
 .wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-text-field:focus {
     box-shadow: 0 0px 15px #1E90FF;
 }
+*/
 
 
 /*=============================

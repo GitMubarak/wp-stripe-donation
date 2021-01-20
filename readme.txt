@@ -133,6 +133,7 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 * Donate amount option added
 * Show/Hide Banner option added
 * Show/Hide Header option added
+* Showing donation data in descending order
 
 = 1.4 =
 * Display Header option added

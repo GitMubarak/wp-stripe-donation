@@ -64,8 +64,8 @@ class Wpsd_Admin
 
 		add_submenu_page(
 			'wpsd-admin-settings',
-			esc_html__('All Donations', WPSD_TXT_DOMAIN),
-			esc_html__('All Donations', WPSD_TXT_DOMAIN),
+			__('Donations Info', WPSD_TXT_DOMAIN),
+			__('Donations Info', WPSD_TXT_DOMAIN),
 			'manage_options',
 			'wpsd-all-donations',
 			array($this, WPSD_PRFX . 'all_donations')
@@ -152,7 +152,7 @@ class Wpsd_Admin
 	protected function wpsd_get_all_donations()
 	{
 		global $wpdb;
-		return $wpdb->get_results($wpdb->prepare("SELECT * FROM $this->wpsdTable WHERE %d", 1));
+		return $wpdb->get_results($wpdb->prepare("SELECT * FROM $this->wpsdTable WHERE %d ORDER BY wpsd_id DESC LIMIT 0, 10", 1));
 	}
 
 	protected function wpsd_display_notification($type, $msg) { 

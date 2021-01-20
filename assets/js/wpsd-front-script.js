@@ -91,7 +91,9 @@
                     wpsdDonateAmount = wpsdRadioVal + "00";
                 } else {
                     wpsdShowCheckout = false;
-                    alert("Please select an amount to donate.");
+                    //alert("Please select an amount to donate.");
+                    $('#wpsd-donation-message').show('slow').addClass('error').html('Please select an amount to donate');
+                    //$("#wpsd_donate_other_amount").focus();
                 }
             }
             if (wpsdAdminScriptObj.stripePKey == "") {
