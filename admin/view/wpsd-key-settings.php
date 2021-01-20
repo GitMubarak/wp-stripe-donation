@@ -17,36 +17,45 @@ if (is_array($wpsdKeySettings)) {
      $wpsdSecretKey = "";
 }
 ?>
-<div id="wpsd-wrap-all" class="wrap">
-    <div class="settings-banner">
-        <h2><?php esc_html_e('WP Stripe Donation Key Settings', WPSD_TXT_DOMAIN); ?></h2>
-    </div>
-    <?php if ($wpsdKeyShowMessage) : $this->wpsd_display_notification('success', 'Your information updated successfully.');
-     endif; ?>
+<div id="wpsd-wrap-all" class="wrap wpsd-key-settings">
 
-    <form name="wpsd-general-settings-form" role="form" class="form-horizontal" method="post" action=""
-        id="wpsd-settings-form-id">
-        <table class="form-table">
-            <tr class="wpsd_private_key">
-                <th scope="row">
-                    <label for="wpsd_private_key"><?php esc_html_e('Private Key:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="text" name="wpsd_private_key" id="wpsd_private_key" class="regular-text"
-                        value="<?php echo esc_html($wpsdPrivateKey); ?>" autocomplete="off" />
-                </td>
-            </tr>
-            <tr class="wpsd_secret_key">
-                <th scope="row">
-                    <label for="wpsd_secret_key"><?php esc_html_e('Secret Key:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="password" name="wpsd_secret_key" id="wpsd_secret_key" class="regular-text"
-                        value="<?php echo esc_html($wpsdSecretKey); ?>" autocomplete="off" />
-                </td>
-            </tr>
-        </table>
-        <p class="submit"><button id="updateKeySettings" name="updateKeySettings"
-                class="button button-primary"><?php esc_attr_e('Update Settings', WPSD_TXT_DOMAIN); ?></button></p>
-    </form>
+    <div class="settings-banner">
+        <h2><?php esc_html_e('Key Settings', WPSD_TXT_DOMAIN); ?></h2>
+    </div>
+
+    <?php 
+        if ( $wpsdKeyShowMessage ) {
+            $this->wpsd_display_notification('success', 'Your information updated successfully.');
+        }
+    ?>
+
+    <div class="wpsd-wrap">
+        <div class="wpsd_personal_wrap wpsd_personal_help" style="width: 845px; float: left; margin-top: 5px;">
+            <form name="wpsd-general-settings-form" role="form" class="form-horizontal" method="post" action="" id="wpsd-settings-form-id">
+                <table class="form-table">
+                    <tr class="wpsd_private_key">
+                        <th scope="row">
+                            <label for="wpsd_private_key"><?php esc_html_e('Private Key:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_private_key" id="wpsd_private_key" class="regular-text" 
+                                value="<?php echo esc_html($wpsdPrivateKey); ?>" autocomplete="off" />
+                        </td>
+                    </tr>
+                    <tr class="wpsd_secret_key">
+                        <th scope="row">
+                            <label for="wpsd_secret_key"><?php esc_html_e('Secret Key:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="password" name="wpsd_secret_key" id="wpsd_secret_key" class="regular-text"
+                                value="<?php echo esc_html($wpsdSecretKey); ?>" autocomplete="off" />
+                        </td>
+                    </tr>
+                </table>
+                <p class="submit"><button id="updateKeySettings" name="updateKeySettings"
+                        class="button button-primary"><?php esc_attr_e('Save Settings', WPSD_TXT_DOMAIN); ?></button></p>
+            </form>
+        </div>
+        <?php $this->wpsd_admin_sidebar(); ?>
+    </div>
 </div>
