@@ -11,12 +11,9 @@
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-if ( ! defined('WPINC') ) {
-    die;
-}
-if ( ! defined('ABSPATH') ) {
-    exit;
-}
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined('WPINC') ) die;
 
 global $wpdb;
 

@@ -26,7 +26,7 @@ if (is_array($wpsdGeneralSettings)) {
             if (count($wpsdDonations) > 0) :
                 foreach ($wpsdDonations as $donation) : ?>
             <tr>
-                <td class="wpsd-donated-amount"><?php printf('%s', $donation->wpsd_donated_amount); ?></td>
+                <td class="wpsd-donated-amount"><?php printf('%d', $donation->wpsd_donated_amount); ?></td>
                 <td><?php echo esc_html($wpsdDonateCurrency); ?></td>
                 <td><?php printf('%s', $donation->wpsd_donation_for); ?></td>
                 <td><?php printf('%s', $donation->wpsd_donator_name); ?></td>

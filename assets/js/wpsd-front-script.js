@@ -5,6 +5,20 @@
 
     var wpsdDonateAmount = 0;
 
+    $('#wpsd_donate_other_amount').on('keyup', function(e) {
+
+        $("#wpsd-donation-form-id input[type='radio']").prop("checked", false);
+
+        if (/^(\d+(\.\d{0,2})?)?$/.test($(this).val())) {
+            // Input is OK. Remember this value
+            $(this).data('prevValue', $(this).val());
+        } else {
+            // Input is not OK. Restore previous value
+            $(this).val($(this).data('prevValue') || '');
+        }
+    }); //.trigger('input'); // Initialise the `prevValue` data properties
+
+
     if (typeof(StripeCheckout) !== "undefined") {
 
         $("#wpsd-donation-form-id input[type='radio']").on("click", function() {
@@ -12,18 +26,20 @@
             $('#wpsd_donate_other_amount').val('');
 
         });
-
+        /*
         $('#wpsd_donate_other_amount').on('keyup', function() {
 
             $("#wpsd-donation-form-id input[type='radio']").prop("checked", false);
-
+            wpsdDonateAmount = $(this).val();
+            alert(wpsdDonateAmount);
             //this.value = this.value.replace(/[^0-9\.]/g, '');
-            this.value = this.value.replace(/^[0-9]+\.?[0-9]*$/g, '');
+            //this.value = this.value.replace(/^[0-9]+\.?[0-9]*$/g, '');
+            if (!wpsd_validate_other_amt(this.value)) {
+                alert('not match');
+            }
 
         });
-
-
-
+        */
         var wpsdHandler = StripeCheckout.configure({
             key: wpsdAdminScriptObj.stripePKey,
             image: wpsdAdminScriptObj.image,
@@ -82,13 +98,13 @@
                 return false;
             }
             */
-            if ($("#wpsd_donate_other_amount").val() != "") {
-                wpsdDonateAmount = $("#wpsd_donate_other_amount").val() * 100;
+            if ($("#wpsd_donate_other_amount").val() != '') {
+                wpsdDonateAmount = $("#wpsd_donate_other_amount").val();
                 //alert(wpsdDonateAmount);
             } else {
                 var wpsdRadioVal = $(".wpsd-wrapper-content #wpsd_donate_amount input[name='wpsd_donate_amount']:checked").val();
                 if (wpsdRadioVal !== undefined) {
-                    wpsdDonateAmount = wpsdRadioVal + "00";
+                    wpsdDonateAmount = wpsdRadioVal;
                 } else {
                     wpsdShowCheckout = false;
                     //alert("Please select an amount to donate.");
@@ -126,6 +142,11 @@
     function wpsd_validate_email($email) {
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return emailReg.test($email);
+    }
+
+    function wpsd_validate_other_amt(s) {
+        var rgx = /^[0-9]*\.?[0-9]*$/;
+        return s.match(rgx);
     }
 
 })(window, jQuery);

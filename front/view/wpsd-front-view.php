@@ -1,17 +1,25 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $wpsdGeneralSettings = stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
-if (is_array($wpsdGeneralSettings)) {
+
+if ( is_array( $wpsdGeneralSettings ) ) {
+
     $wpsdDonationEmail = $wpsdGeneralSettings['wpsd_donation_email'];
     $wpsdPaymentTitle = $wpsdGeneralSettings['wpsd_payment_title'];
     $wpsdDonationOptions = $wpsdGeneralSettings['wpsd_donation_options'];
     $wpsdDonateButtonText = $wpsdGeneralSettings['wpsd_donate_button_text'];
     $wpsdDonateCurrency = $wpsdGeneralSettings['wpsd_donate_currency'];
+
 } else {
+
     $wpsdDonationEmail = "";
     $wpsdPaymentTitle = "Donate Us";
     $wpsdDonationOptions = "";
     $wpsdDonateButtonText = "Donate Now";
     $wpsdDonateCurrency = "USD";
+
 }
 
 $wpsd_donation_values   = isset( $wpsdGeneralSettings['wpsd_donation_values'] ) ? explode( ',', $wpsdGeneralSettings['wpsd_donation_values'] ) : array();
@@ -19,12 +27,16 @@ $wpsd_donation_values   = isset( $wpsdGeneralSettings['wpsd_donation_values'] ) 
 //
 $wpsdTempSettings = stripslashes_deep( unserialize( get_option('wpsd_temp_settings') ) );
 
-if (is_array($wpsdTempSettings)) {
+if ( is_array( $wpsdTempSettings ) ) {
+
     $wpsdFormBanner = $wpsdTempSettings['wpsd_form_banner'];
     $wpsdSelectTemp = $wpsdTempSettings['wpsd_select_template'];
+
 } else {
+
     $wpsdFormBanner = "";
     $wpsdSelectTemp = 0;
+
 }
 
 $wpsd_display_banner        = isset( $wpsdTempSettings['wpsd_display_banner'] ) ? $wpsdTempSettings['wpsd_display_banner'] : '';
@@ -38,23 +50,29 @@ $wpsd_donate_amount_label   = isset( $wpsdTempSettings['wpsd_donate_amount_label
 $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOptions) : array();
 ?>
 <div class="wpsd-master-wrapper wpsd-template-<?php printf('%d', $wpsdSelectTemp); ?>" id="wpsd-wrap-all">
-    <?php if( '1' === $wpsd_display_header ) { ?>
-        <div class="wpsd-wrapper-header">
-            <h2><?php esc_html_e('WP Stripe Donation', WPSD_TXT_DOMAIN); ?></h2>
-        </div>
-    <?php } ?>
+    <?php 
+        if( '1' === $wpsd_display_header ) { 
+            ?>
+            <div class="wpsd-wrapper-header">
+                <h2><?php esc_html_e('WP Stripe Donation', WPSD_TXT_DOMAIN); ?></h2>
+            </div>
+            <?php 
+        } 
+    ?>
     <?php
-    if( '1' === $wpsd_display_banner ) {
-        if( intval( $wpsdFormBanner ) > 0 ) {
+    if ( '1' === $wpsd_display_banner ) {
+        if ( intval( $wpsdFormBanner ) > 0 ) {
             echo wp_get_attachment_image( $wpsdFormBanner, 'full', false, array('class' => 'wpsd-form-banner') );
         }
     }
     ?>
     <div class="wpsd-wrapper-content">
+
         <fieldset id="el##" style="margin:0; padding:0; border:0; border-top:1px solid #CCC;">
             <legend style="padding:0 20px; margin:0 auto;"><?php echo esc_html( $wpsdPaymentTitle ); ?></legend>
         </fieldset>
-        <form action="" method="POST" id="wpsd-donation-form-id">
+
+        <form action="" method="POST" id="wpsd-donation-form-id" autocomplete="on">
             <!-- Input section -->
             <label for="wpsd_donation_for" class="wpsd-donation-form-label"><?php echo esc_html( $wpsd_donation_for_label ); ?>:</label>
             <select name="wpsd_donation_for" id="wpsd_donation_for" class="wpsd-text-field">
@@ -112,7 +130,7 @@ $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOption
                 </li>
                 <li>
                     <div class="form-group">
-                        <input id="wpsd_donate_other_amount" type="number" class="wpsd_donate_other_amount"
+                        <input id="wpsd_donate_other_amount" type="text" class="wpsd_donate_other_amount"
                             name="wpsd_donate_other_amount"> <?php echo esc_html($wpsdDonateCurrency); ?>
                     </div>
                 </li>

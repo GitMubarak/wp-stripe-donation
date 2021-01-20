@@ -1,4 +1,6 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  *	Front CLass
@@ -87,57 +89,64 @@ class Wpsd_Front
 		return $output;
 	}
 
-	function wpsd_donation_handler()
-	{
+	function wpsd_donation_handler() {
+
 		global $wpdb;
 		$tableData = WPSD_TABLE;
-		/*
-		* Validation all required fields
-		*/
+
+		// Checking all required fields
 		if (
-			!empty($_POST['token']) && !empty($_POST['wpsdSecretKey']) && !empty($_POST['email']) && !empty($_POST['amount']) && !empty($_POST['name']) &&
-			!empty($_POST['donation_for'])
+			! empty( $_POST['token'] ) 
+			&& ! empty( $_POST['wpsdSecretKey'] ) 
+			&& ! empty( $_POST['email'] ) 
+			&& ! empty( $_POST['amount'] ) 
+			&& ! empty( $_POST['name'] ) 
+			&& ! empty( $_POST['donation_for'] )
 		) {
+			
 
-			$wpsdDonationFor = sanitize_text_field($_POST['donation_for']);
-			$wpsdName = sanitize_text_field($_POST['name']);
-			$wpsdEmail = sanitize_email($_POST['email']);
-			$wpsdPhone = intval($_POST['phone']);
-			$wpsdAmount = intval($_POST['amount']);
-			$wpsdCurrency = sanitize_text_field($_POST['currency']);
-
-			require_once "Stripe/Stripe.php";
-			include(WPSD_PATH . '/Stripe/Stripe.php');
-			$stripe_key = sanitize_text_field($_POST['wpsdSecretKey']);
-			Stripe::setApiKey(base64_decode($stripe_key));
-
-			// Credit card details
-			$token = sanitize_text_field($_POST['token']);
+			$wpsdDonationFor 	= sanitize_text_field($_POST['donation_for']);
+			$wpsdName 			= sanitize_text_field($_POST['name']);
+			$wpsdEmail 			= sanitize_email($_POST['email']);
+			$wpsdPhone 			= intval($_POST['phone']);
+			$wpsdAmount 		= filter_var( $_POST['amount'], FILTER_SANITIZE_STRING );
+			$wpsdCurrency 		= sanitize_text_field( $_POST['currency'] );
+			$wpsdStripeKey 		= sanitize_text_field( $_POST['wpsdSecretKey'] );
+			$wpsdToken 			= sanitize_text_field( $_POST['token'] );
+			
+			//require_once "Stripe/Stripe.php";
+			
+			require_once( WPSD_PATH . 'front/Stripe/Stripe.php' );
+			
+			Stripe::setApiKey( base64_decode( $wpsdStripeKey ) );
 
 			// Transaction starting
 			try {
-				$charge = Stripe_Charge::create(
-					array(
-						"amount" => $wpsdAmount,
-						"currency" => $wpsdCurrency,
-						"card" => $token,
-						"description" => $wpsdName . " (" . $wpsdPhone . ") donated for " . $wpsdDonationFor
-					)
-				);
-
-				$wpsdGeneralSettings = stripslashes_deep(unserialize(get_option('wpsd_general_settings')));
-				if (is_array($wpsdGeneralSettings)) {
-					$wpsdDonationEmail = !empty($wpsdGeneralSettings['wpsd_donation_email']) ? $wpsdGeneralSettings['wpsd_donation_email'] : "";
-				}
+				
+				$charge = Stripe_Charge::create( array(
+					"amount" 		=> $wpsdAmount,
+					"currency" 		=> $wpsdCurrency,
+					"card" 			=> $wpsdToken,
+					"description" 	=> 'aaaa', //$wpsdName . " (" . $wpsdPhone . ") donated for " . $wpsdDonationFor
+				));
+				//echo WPSD_PATH; die();
+				/*
+				$wpsdGeneralSettings 	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
+				$wpsdDonationEmail 		= isset( $wpsdGeneralSettings['wpsd_donation_email'] ) ? $wpsdGeneralSettings['wpsd_donation_email'] : '';
+				
 				// Send the email if the charge successful.
-				$wpsdEmailSubject = "New Donation for " . $wpsdDonationFor;
-				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Email: " . $wpsdEmail . "<br>Amount: " . substr($wpsdAmount, 0, -2) . $wpsdCurrency . "<br>For: " . $wpsdDonationFor . "<br>";
-				if ($wpsdPhone) {
+				$wpsdEmailSubject = "You have a Donation for - " . $wpsdDonationFor;
+
+				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Email: " . $wpsdEmail . "<br>Amount: " . $wpsdAmount . $wpsdCurrency . "<br>For: " . $wpsdDonationFor . "<br>";
+
+				if ( $wpsdPhone ) {
 					$wpsdEmailMessage .= "Phone: " . $wpsdPhone . "<br>";
 				}
+
 				$headers = array('Content-Type: text/html; charset=UTF-8');
 
-				wp_mail($wpsdDonationEmail, $wpsdEmailSubject, $wpsdEmailMessage, $headers);
+				wp_mail( $wpsdDonationEmail, $wpsdEmailSubject, $wpsdEmailMessage, $headers );
+
 				$wpdb->query('INSERT INTO ' . $tableData . ' (
 															wpsd_donation_for,
 															wpsd_donator_name,
@@ -151,23 +160,24 @@ class Wpsd_Front
 															"' . $wpsdName . '",
 															"' . $wpsdEmail . '",
 															"' . $wpsdPhone . '",
-															"' . substr($wpsdAmount, 0, -2) . '",
+															"' . $wpsdAmount . '",
 															"' . date('Y-m-d h:i:s') . '"
 													)
 												');
-
+				*/
 				// Upon Successful transaction, reply an Success message
-				die(json_encode(array(
+				die( json_encode( array(
 					"status" => "success",
 					"message" => "Thank you for your donation"
-				)));
-			} catch (Stripe_CardError $e) {
+				) ) );
+
+			} catch ( Stripe_CardError $e ) {
 
 				// Upon unsuccessful transaction/rejection, reply an Error message
-				die(json_encode(array(
+				die( json_encode( array(
 					"status" => "error",
 					"message" => $e
-				)));
+				) ) );
 			}
 		}
 	}

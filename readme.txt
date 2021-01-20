@@ -1,4 +1,4 @@
-=== WordPress Stripe Donation ===
+=== Stripe Donations ===
 Contributors: mhmrajib, hmplugin
 Donate link: https://www.paypal.me/mhmrajib
 Tags: charity, donate, donation, donations, stripe
@@ -13,11 +13,11 @@ This plugin will display a form to accept donation via Stripe payment.
 
 == Description ==
 
-This [WordPress Stripe Donation](https://hmplugin.com) plugin will allow you to collect donations on your website via Stripe payment method.
+This [Stripe Donations](https://hmplugin.com) plugin will allow you to collect donations on your website via Stripe payment method.
 
 You can place a Donation form in any page where you want to collect money. Donors can use their Stripe account or Credit Card to donate money to you.
 
-What makes this [WordPress Stripe Donation](https://demo.hmplugin.com/wp-stripe-donation/) plugin powerful is its usability. After installation and some quick settings, donors from around the world can start donating to you via Stripe.
+What makes this [Stripe Donations](https://demo.hmplugin.com/wp-stripe-donation/) plugin powerful is its usability. After installation and some quick settings, donors from around the world can start donating to you via Stripe.
 
 This Stripe Donation is a simple, effective and powerful plugin you can trust.
 
@@ -59,7 +59,7 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 
 **👨‍💻 Demo / Support/ Live Chat**
 
-[WordPress Stripe Donation: See Demo](https://demo.hmplugin.com/wp-stripe-donation/)
+[Stripe Donations: See Demo](https://demo.hmplugin.com/wp-stripe-donation/)
 
 
 **👍 Give us a Feedback/Rating**
@@ -134,6 +134,7 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 * Show/Hide Banner option added
 * Show/Hide Header option added
 * Showing donation data in descending order
+* Autocomplete turned off in donation form
 
 = 1.4 =
 * Display Header option added
