@@ -26,12 +26,12 @@ class Wpsd_Admin
 	public function wpsd_admin_menu()
 	{
 		add_menu_page(
-			esc_html__('WP Stripe Donation', WPSD_TXT_DOMAIN),
-			esc_html__('WP Stripe Donation', WPSD_TXT_DOMAIN),
+			__('WP Stripe Donation', WPSD_TXT_DOMAIN),
+			__('WP Stripe Donation', WPSD_TXT_DOMAIN),
 			'',
 			'wpsd-admin-settings',
 			'',
-			'dashicons-smiley',
+			'dashicons-money-alt',
 			100
 		);
 
@@ -69,6 +69,15 @@ class Wpsd_Admin
 			'manage_options',
 			'wpsd-all-donations',
 			array($this, WPSD_PRFX . 'all_donations')
+		);
+
+		add_submenu_page(
+			'wpsd-admin-settings',
+			__('Help & Usage', WPSD_TXT_DOMAIN),
+			__('Help & Usage', WPSD_TXT_DOMAIN),
+			'manage_options',
+			'wpsd-get-help',
+			array( $this, WPSD_PRFX . 'get_help' )
 		);
 	}
 
@@ -146,16 +155,17 @@ class Wpsd_Admin
 		return $wpdb->get_results($wpdb->prepare("SELECT * FROM $this->wpsdTable WHERE %d", 1));
 	}
 
-	protected function wpsd_display_notification($type, $msg)
-	{ ?>
-<div class="wpsd-alert <?php printf('%s', $type); ?>">
-    <span class="wpsd-closebtn">&times;</span>
-    <strong><?php esc_html_e(ucfirst($type), WPSD_TXT_DOMAIN); ?>!</strong> <?php esc_html_e($msg, WPSD_TXT_DOMAIN); ?>
-</div>
-<?php }
+	protected function wpsd_display_notification($type, $msg) { 
+		?>
+		<div class="wpsd-alert <?php printf('%s', $type); ?>">
+			<span class="wpsd-closebtn">&times;</span>
+			<strong><?php esc_html_e(ucfirst($type), WPSD_TXT_DOMAIN); ?>!</strong> <?php esc_html_e($msg, WPSD_TXT_DOMAIN); ?>
+		</div>
+		<?php 
+	}
 
-	function wpsd_get_image()
-	{
+	function wpsd_get_image() {
+		
 		if (isset($_GET['id'])) {
 			$image = wp_get_attachment_image(filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT), esc_html($_GET['img_type']), false, array('id' => esc_html($_GET['prev_id'])));
 			$data = array(
@@ -165,6 +175,45 @@ class Wpsd_Admin
 		} else {
 			wp_send_json_error();
 		}
+	}
+
+	function wpsd_get_help() {
+		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'help-usage.php';
+	}
+
+	function wpsd_admin_sidebar() {
+		?>
+		<div class="wpsd-admin-sidebar" style="width: 277px; float: left; margin-top: 5px;">
+			<div class="postbox">
+				<h3 class="hndle"><span>Support / Bug / Customization</span></h3>
+				<div class="inside centered">
+					<p>Please feel free to let us know if you have any bugs to report. Your report / suggestion can make the plugin awesome!</p>
+					<p style="margin-bottom: 1px! important;"><a href="https://hmplugin.com/contact-us/" target="_blank" class="button button-primary">Get Support</a></p>
+				</div>
+			</div>
+			<div class="postbox">
+				<h3 class="hndle"><span>Buy us a coffee</span></h3>
+				<div class="inside centered">
+					<p>If you like the plugin, would you like to support the advancement of this plugin?</p>
+					<p style="margin-bottom: 1px! important;"><a href='https://www.paypal.me/mhmrajib' class="button button-primary" target="_blank">Donate</a></p>
+				</div>
+			</div>
+
+			<div class="postbox">
+				<h3 class="hndle"><span>Join HM Plugin on facebook</span></h3>
+				<div class="inside centered">
+					<iframe src="//www.facebook.com/plugins/likebox.php?href=https://www.facebook.com/hmplugin&amp;width&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:220px;" allowTransparency="true"></iframe>
+				</div>
+			</div>
+
+			<div class="postbox">
+				<h3 class="hndle"><span>Follow HM Plugin on twitter</span></h3>
+				<div class="inside centered">
+					<a href="https://twitter.com/hmplugin" target="_blank" class="button button-secondary">Follow @hmplugin<span class="dashicons dashicons-twitter" style="position: relative; top: 3px; margin-left: 3px; color: #0fb9da;"></span></a>
+				</div>
+			</div>
+		</div> 
+		<?php
 	}
 }
 ?>

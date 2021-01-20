@@ -35,119 +35,136 @@ $wpsd_donator_email_label   = isset( $wpsdTempSettings['wpsd_donator_email_label
 $wpsd_donator_phone_label   = isset( $wpsdTempSettings['wpsd_donator_phone_label'] ) ? $wpsdTempSettings['wpsd_donator_phone_label'] : 'Donator Phone';
 $wpsd_donate_amount_label   = isset( $wpsdTempSettings['wpsd_donate_amount_label'] ) ? $wpsdTempSettings['wpsd_donate_amount_label'] : 'Donate Amount';
 ?>
-<div id="wpsd-wrap-all" class="wrap">
-    <div class="settings-banner">
-        <h2><?php esc_html_e('WP Stripe Template Settings', WPSD_TXT_DOMAIN); ?></h2>
-    </div>
-    <?php if( $wpsdTempShowMessage ) { $this->wpsd_display_notification('success', 'Your information updated successfully.'); } ?>
+<div id="wpsd-wrap-all" class="wrap wpsd-template-settings">
 
-    <form name="wpsd-temp-settings-form" role="form" class="form-horizontal" method="post" action=""
-        id="wpsd-temp-settings-form-id">
-        <table class="form-table">
-            <tr class="wpsd_select_template">
-                <th scope="row">
-                    <label
-                        for="wpsd_select_template"><?php esc_html_e('Select a Template:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <div class="wpsd-template-selector">
-                        <?php for ($i = 0; $i < 5; $i++) : ?>
-                        <div class="wpsd-template-item">
-                            <input type="radio" name="wpsd_select_template"
-                                id="<?php printf('wpsd_select_template_%d', $i); ?>" value="<?php printf('%d', $i); ?>"
-                                <?php if( $wpsdSelectTemp == $i ) echo 'checked'; ?>>
-                            <label class="wpsd-template-<?php printf('%d', $i); ?>"></label>
-                        </div>
-                        <?php endfor; ?>
-                    </div>
-                </td>
-            </tr>
-            <tr class="wpsd_display_banner">
-                <th scope="row">
-                    <label for="wpsd_display_banner"><?php esc_html_e('Display Banner:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="checkbox" name="wpsd_display_banner" class="wpsd_display_banner" value="1" <?php if( '1' === $wpsd_display_banner ) { echo 'checked'; } ?> >
-                </td>
-            </tr>
-            <tr class="wpsd_form_banner">
-                <th scope="row">
-                    <label for="wpsd_form_banner"><?php esc_html_e('Donation Form Banner:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="hidden" name="wpsd_form_banner" id="wpsd_form_banner"
-                        value="<?php echo esc_attr($wpsdFormBanner); ?>" class="regular-text" />
-                    <input type='button' class="button-primary"
-                        value="<?php esc_attr_e('Select a banner', WPSD_TXT_DOMAIN); ?>" id="wpsd_media_manager"
-                        data-image-type="full" />
-                    <?php
-                    //$wpsdFormBannerImageId = esc_attr($wpsdFormBanner);
-                    $wpsdFormBannerImage = "";
-                    if( intval( $wpsdFormBanner ) > 0 ) {
-                        $wpsdFormBannerImage = wp_get_attachment_image( $wpsdFormBanner, 'full', false, array('id' => 'wpsd-form-banner-preview-image') );
-                    }
-                    ?>
-                    <div id="wpsd-form-banner-preview-image">
-                        <?php echo $wpsdFormBannerImage; ?>
-                    </div>
-                </td>
-            </tr>
-            <tr class="wpsd_display_header">
-                <th scope="row">
-                    <label for="wpsd_display_header"><?php esc_html_e('Display Header:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="checkbox" name="wpsd_display_header" class="wpsd_display_header" value="1" <?php if( '1' === $wpsd_display_header ) { echo 'checked'; } ?> >
-                </td>
-            </tr>
-            <tr class="wpsd_donation_for_label">
-                <th scope="row">
-                    <label for="wpsd_donation_for_label"><?php esc_html_e('Donation For Label:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="text" name="wpsd_donation_for_label" class="medium-text" placeholder="Donation For"
-                        value="<?php echo esc_attr( $wpsd_donation_for_label ); ?>">
-                </td>
-            </tr>
-            <tr class="wpsd_donator_name_label">
-                <th scope="row">
-                    <label for="wpsd_donator_name_label"><?php esc_html_e('Donator Name Label:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="text" name="wpsd_donator_name_label" class="medium-text" placeholder="Donator Name"
-                        value="<?php echo esc_attr( $wpsd_donator_name_label ); ?>">
-                </td>
-            </tr>
-            <tr class="wpsd_donator_email_label">
-                <th scope="row">
-                    <label for="wpsd_donator_email_label"><?php esc_html_e('Donator Email Label:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="text" name="wpsd_donator_email_label" class="medium-text" placeholder="Donator Email"
-                        value="<?php echo esc_attr( $wpsd_donator_email_label ); ?>">
-                </td>
-            </tr>
-            <tr class="wpsd_donator_phone_label">
-                <th scope="row">
-                    <label for="wpsd_donator_phone_label"><?php esc_html_e('Donator Phone Label:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="text" name="wpsd_donator_phone_label" class="medium-text" placeholder="Donator Phone"
-                        value="<?php echo esc_attr( $wpsd_donator_phone_label ); ?>">
-                </td>
-            </tr>
-            <tr class="wpsd_donate_amount_label">
-                <th scope="row">
-                    <label for="wpsd_donate_amount_label"><?php esc_html_e('Donate Amount Label:', WPSD_TXT_DOMAIN); ?></label>
-                </th>
-                <td>
-                    <input type="text" name="wpsd_donate_amount_label" class="medium-text" placeholder="Donate Amount"
-                        value="<?php echo esc_attr( $wpsd_donate_amount_label ); ?>">
-                </td>
-            </tr>
-        </table>
-        <p class="submit"><button id="updateTempSettings" name="updateTempSettings"
-                class="button button-primary"><?php esc_attr_e('Update Temp Settings', WPSD_TXT_DOMAIN); ?></button>
-        </p>
-    </form>
+    <div class="settings-banner">
+        <h2><?php esc_html_e('Template Settings', WPSD_TXT_DOMAIN); ?></h2>
+    </div>
+
+    <?php 
+        if ( $wpsdTempShowMessage ) { 
+            $this->wpsd_display_notification('success', 'Your information updated successfully.'); 
+        } 
+    ?>
+
+    <div class="wpsd-wrap">
+
+        <div class="wpsd_personal_wrap wpsd_personal_help" style="width: 845px; float: left; margin-top: 5px;">
+            
+            <form name="wpsd-temp-settings-form" role="form" class="form-horizontal" method="post" action=""
+                id="wpsd-temp-settings-form-id">
+                <table class="form-table">
+                    <tr class="wpsd_select_template">
+                        <th scope="row">
+                            <label
+                                for="wpsd_select_template"><?php esc_html_e('Select a Template:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <div class="wpsd-template-selector">
+                                <?php for ($i = 0; $i < 5; $i++) : ?>
+                                <div class="wpsd-template-item">
+                                    <input type="radio" name="wpsd_select_template"
+                                        id="<?php printf('wpsd_select_template_%d', $i); ?>" value="<?php printf('%d', $i); ?>"
+                                        <?php if( $wpsdSelectTemp == $i ) echo 'checked'; ?>>
+                                    <label class="wpsd-template-<?php printf('%d', $i); ?>"></label>
+                                </div>
+                                <?php endfor; ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="wpsd_display_banner">
+                        <th scope="row">
+                            <label for="wpsd_display_banner"><?php esc_html_e('Display Banner:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="checkbox" name="wpsd_display_banner" class="wpsd_display_banner" value="1" <?php if( '1' === $wpsd_display_banner ) { echo 'checked'; } ?> >
+                        </td>
+                    </tr>
+                    <tr class="wpsd_form_banner">
+                        <th scope="row">
+                            <label for="wpsd_form_banner"><?php esc_html_e('Donation Form Banner:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="hidden" name="wpsd_form_banner" id="wpsd_form_banner"
+                                value="<?php echo esc_attr($wpsdFormBanner); ?>" class="regular-text" />
+                            <input type='button' class="button-primary"
+                                value="<?php esc_attr_e('Select a banner', WPSD_TXT_DOMAIN); ?>" id="wpsd_media_manager"
+                                data-image-type="full" />
+                            <?php
+                            //$wpsdFormBannerImageId = esc_attr($wpsdFormBanner);
+                            $wpsdFormBannerImage = "";
+                            if( intval( $wpsdFormBanner ) > 0 ) {
+                                $wpsdFormBannerImage = wp_get_attachment_image( $wpsdFormBanner, 'full', false, array('id' => 'wpsd-form-banner-preview-image') );
+                            }
+                            ?>
+                            <div id="wpsd-form-banner-preview-image">
+                                <?php echo $wpsdFormBannerImage; ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="wpsd_display_header">
+                        <th scope="row">
+                            <label for="wpsd_display_header"><?php esc_html_e('Display Header:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="checkbox" name="wpsd_display_header" class="wpsd_display_header" value="1" <?php if( '1' === $wpsd_display_header ) { echo 'checked'; } ?> >
+                        </td>
+                    </tr>
+                    <tr class="wpsd_donation_for_label">
+                        <th scope="row">
+                            <label for="wpsd_donation_for_label"><?php esc_html_e('Donation For Label:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_donation_for_label" class="medium-text" placeholder="Donation For"
+                                value="<?php echo esc_attr( $wpsd_donation_for_label ); ?>">
+                        </td>
+                    </tr>
+                    <tr class="wpsd_donator_name_label">
+                        <th scope="row">
+                            <label for="wpsd_donator_name_label"><?php esc_html_e('Donator Name Label:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_donator_name_label" class="medium-text" placeholder="Donator Name"
+                                value="<?php echo esc_attr( $wpsd_donator_name_label ); ?>">
+                        </td>
+                    </tr>
+                    <tr class="wpsd_donator_email_label">
+                        <th scope="row">
+                            <label for="wpsd_donator_email_label"><?php esc_html_e('Donator Email Label:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_donator_email_label" class="medium-text" placeholder="Donator Email"
+                                value="<?php echo esc_attr( $wpsd_donator_email_label ); ?>">
+                        </td>
+                    </tr>
+                    <tr class="wpsd_donator_phone_label">
+                        <th scope="row">
+                            <label for="wpsd_donator_phone_label"><?php esc_html_e('Donator Phone Label:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_donator_phone_label" class="medium-text" placeholder="Donator Phone"
+                                value="<?php echo esc_attr( $wpsd_donator_phone_label ); ?>">
+                        </td>
+                    </tr>
+                    <tr class="wpsd_donate_amount_label">
+                        <th scope="row">
+                            <label for="wpsd_donate_amount_label"><?php esc_html_e('Donate Amount Label:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_donate_amount_label" class="medium-text" placeholder="Donate Amount"
+                                value="<?php echo esc_attr( $wpsd_donate_amount_label ); ?>">
+                        </td>
+                    </tr>
+                </table>
+                <p class="submit"><button id="updateTempSettings" name="updateTempSettings"
+                        class="button button-primary"><?php esc_attr_e('Save Settings', WPSD_TXT_DOMAIN); ?></button>
+                </p>
+            </form>
+        
+        </div>
+
+        <?php $this->wpsd_admin_sidebar(); ?>
+
+    </div>
+
 </div>

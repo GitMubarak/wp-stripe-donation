@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Plugin Name: 	WP Stripe Donation
+ * Plugin Name: 	WordPress Stripe Donation
  * Plugin URI:		http://wordpress.org/plugins/wp-stripe-donation/
  * Description: 	This WordPress Stripe Donation is a simple plugin that allows you to collect donations on your website via Stripe payment method.
  * Version: 		1.5
- * Author: 			Hossni Mubarak
- * Author URI: 		http://www.hossnimubarak.com
+ * Author: 			HM Plugin
+ * Author URI: 		https://hmplugin.com
  * License:         GPL-2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  */
@@ -34,4 +34,19 @@ require_once WPSD_PATH . 'inc/' . WPSD_CLS_PRFX . 'master.php';
 $wpsd = new Wpsd_Master();
 register_activation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'install_table'));
 $wpsd->wpsd_run();
+
+// Donate link to plugin description
+function wpsd_plugin_row_meta( $links, $file ) {
+
+    if ( WPSD_SLUG === $file ) {
+        $row_meta = array(
+          'wpsd_donation'  => '<a href="' . esc_url( 'https://www.paypal.me/mhmrajib/' ) . '" target="_blank" aria-label="' . esc_attr__( 'Donate us', 'wp-stripe-donation' ) . '" style="color:green; font-weight: bold;">' . esc_html__( 'Donate us', 'wp-stripe-donation' ) . '</a>'
+        );
+ 
+        return array_merge( $links, $row_meta );
+    }
+    return (array) $links;
+}
+add_filter( 'plugin_row_meta', 'wpsd_plugin_row_meta', 10, 2 );
+
 register_deactivation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'unregister_settings'));

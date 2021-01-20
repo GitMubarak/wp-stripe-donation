@@ -1,5 +1,5 @@
 === WordPress Stripe Donation ===
-Contributors: mhmrajib
+Contributors: mhmrajib, hmplugin
 Donate link: https://www.paypal.me/mhmrajib
 Tags: charity, donate, donation, donations, stripe
 Requires at least: 4.6
@@ -13,11 +13,11 @@ This plugin will display a form to accept donation via Stripe payment.
 
 == Description ==
 
-This [WordPress Stripe Donation](http://www.hossnimubarak.com) plugin will allow you to collect donations on your website via Stripe payment method.
+This [WordPress Stripe Donation](https://hmplugin.com) plugin will allow you to collect donations on your website via Stripe payment method.
 
 You can place a Donation form in any page where you want to collect money. Donors can use their Stripe account or Credit Card to donate money to you.
 
-What makes this [WordPress Stripe Donation](http://plugin.hossnimubarak.com/wp-stripe-donation/) plugin powerful is its usability. After installation and some quick settings, donors from around the world can start donating to you via Stripe.
+What makes this [WordPress Stripe Donation](https://demo.hmplugin.com/wp-stripe-donation/) plugin powerful is its usability. After installation and some quick settings, donors from around the world can start donating to you via Stripe.
 
 This Stripe Donation is a simple, effective and powerful plugin you can trust.
 
@@ -39,9 +39,9 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 * Super Easy and Fast
 * Currency changing option
 * Donation form banner upload option
-* 5 colorful template added in template settings
-* Display Banner option
-* Display Header option
+* 5 colorful themes
+* Show/Hide Banner option
+* Show/Hide Header option
 * Donation For Label Option
 * Donator Name Label Option
 * Donator Email Label Option
@@ -67,7 +67,7 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 If you find this plugin helpful, feel free to give us your valuable review. Rate us and share this plugin with your friends. This will motivate us and help us to grow.
 
 
-**🔥 Other Plugins from [HM Plugins](http://www.hossnimubarak.com):**
+**🔥 Other Plugins from [HM Plugin](https://hmplugin.com):**
 
 👉 [WP Books Gallery](https://wordpress.org/plugins/wp-books-gallery/) Books Gallery Plugin for WordPress
 👉 [Worldwide Breaking News Headlines](https://wordpress.org/plugins/worldwide-breaking-news-headlines/) Breaking News, Headlines Widget Plugin for WordPress
@@ -131,8 +131,8 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 = 1.5 =
 * Donate amount option added
-* Display Banner option added
-* Display Header option added
+* Show/Hide Banner option added
+* Show/Hide Header option added
 
 = 1.4 =
 * Display Header option added
