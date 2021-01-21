@@ -30,7 +30,6 @@ define('WPSD_TABLE', $wpdb->prefix . 'wpsd_stripe_donation');
 require_once WPSD_PATH . 'inc/' . WPSD_CLS_PRFX . 'master.php';
 $wpsd = new Wpsd_Master();
 register_activation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'install_table'));
-register_activation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'create_thank_you_page'));
 $wpsd->wpsd_run();
 
 // Creating Thank You Page
