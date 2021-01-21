@@ -100,7 +100,7 @@ $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOption
             <!-- Input section -->
             <label for="wpsd_donator_phone"
                 class="wpsd-donation-form-label"><?php echo esc_html( $wpsd_donator_phone_label ); ?>:</label>
-            <input type="number" name="wpsd_donator_phone" id="wpsd_donator_phone" class="wpsd-text-field"
+            <input type="text" name="wpsd_donator_phone" id="wpsd_donator_phone" class="wpsd-text-field"
                 placeholder="<?php echo esc_attr( $wpsd_donator_phone_label ); ?>">
             <!-- Input section -->
             <label for="wpsd_donate_amount"

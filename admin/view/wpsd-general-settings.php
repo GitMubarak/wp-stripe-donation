@@ -24,7 +24,6 @@ if ( is_array( $wpsdGeneralSettings ) ) {
     $wpsdPaymentTitle = $wpsdGeneralSettings['wpsd_payment_title'];
     $wpsdDonationOptions = $wpsdGeneralSettings['wpsd_donation_options'];
     $wpsdDonateButtonText = $wpsdGeneralSettings['wpsd_donate_button_text'];
-    $wpsdDonateCurrency = $wpsdGeneralSettings['wpsd_donate_currency'];
     $wpsdPaymentLogo = $wpsdGeneralSettings['wpsd_payment_logo'];
 
 } else {
@@ -34,11 +33,11 @@ if ( is_array( $wpsdGeneralSettings ) ) {
     $wpsdDonationOptions = "";
     $wpsdDonateButtonText = "";
     $wpsdPaymentLogo = "";
-    $wpsdDonateCurrency = "USD";
 
 }
 
-$wpsd_donation_values  = isset( $wpsdGeneralSettings['wpsd_donation_values'] ) ? $wpsdGeneralSettings['wpsd_donation_values'] : '';
+$wpsd_donation_values   = isset( $wpsdGeneralSettings['wpsd_donation_values'] ) ? $wpsdGeneralSettings['wpsd_donation_values'] : '';
+$wpsd_currency          = isset( $wpsdGeneralSettings['wpsd_donate_currency'] ) ? $wpsdGeneralSettings['wpsd_donate_currency'] : 'USD';
 ?>
 <div id="wpsd-wrap-all" class="wrap wpsd-general-settings">
 
@@ -122,12 +121,15 @@ $wpsd_donation_values  = isset( $wpsdGeneralSettings['wpsd_donation_values'] ) ?
                             <select name="wpsd_donate_currency" id="wpsd_donate_currency" class="regular-text">
                                 <?php
                                 $wpsdCurrency = $this->hm_get_all_currency();
-                                foreach ($wpsdCurrency as $wpsdcurr) { ?>
-                                <option <?php if ($wpsdDonateCurrency == $wpsdcurr->abbreviation) echo 'selected'; ?>
-                                    value="<?php echo esc_attr($wpsdcurr->abbreviation); ?>">
-                                    <?php echo esc_html($wpsdcurr->currency); ?>-<?php echo esc_html($wpsdcurr->abbreviation); ?>-<?php echo esc_html($wpsdcurr->symbol); ?>
-                                </option>
-                                <?php } ?>
+                                foreach ( $wpsdCurrency as $wpsdcurr ) { 
+                                    ?>
+                                    <option value="<?php echo esc_attr( $wpsdcurr->abbreviation ); ?>" 
+                                        <?php if ( $wpsd_currency === $wpsdcurr->abbreviation ) echo 'selected'; ?> >
+                                        <?php echo esc_html( $wpsdcurr->currency ); ?>-<?php echo esc_html( $wpsdcurr->abbreviation ); ?>-<?php echo esc_html( $wpsdcurr->symbol ); ?>
+                                    </option>
+                                    <?php 
+                                } 
+                                ?>
                             </select>
                         </td>
                     </tr>

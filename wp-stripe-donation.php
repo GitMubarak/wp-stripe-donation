@@ -4,11 +4,11 @@
  * Plugin Name: 	WordPress Stripe Donation
  * Plugin URI:		http://wordpress.org/plugins/wp-stripe-donation/
  * Description: 	This WordPress Stripe Donation is a simple plugin that allows you to collect donations on your website via Stripe payment method.
- * Version: 		1.5
- * Author: 			HM Plugin
+ * Version: 		  1.5
+ * Author: 			  HM Plugin
  * Author URI: 		https://hmplugin.com
- * License:         GPL-2.0+
- * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
+ * License:       GPL-2.0+
+ * License URI:   http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 // Exit if accessed directly
@@ -30,7 +30,32 @@ define('WPSD_TABLE', $wpdb->prefix . 'wpsd_stripe_donation');
 require_once WPSD_PATH . 'inc/' . WPSD_CLS_PRFX . 'master.php';
 $wpsd = new Wpsd_Master();
 register_activation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'install_table'));
+register_activation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'create_thank_you_page'));
 $wpsd->wpsd_run();
+
+// Creating Thank You Page
+function wpsd_create_thank_you_page() {
+  
+  $thank_you_page   = 'Wpsd Thank You';
+  $check_page_exist = get_page_by_title($thank_you_page , 'OBJECT', 'page');
+  $post_content     = '<h1>' . __('Thank You For Your Donation') . '</h1>';
+  $post_content     .= '<p>' . __('We have sent you an email with the donation information') . '</p>';
+  if ( empty( $check_page_exist ) ) {
+      wp_insert_post( array(
+          'comment_status' => 'close',
+          'ping_status'    => 'close',
+          'post_author'    => 1,
+          'post_title'     => ucwords($thank_you_page ),
+          'post_name'      => sanitize_title($thank_you_page ),
+          'post_status'    => 'publish',
+          'post_content'   => $post_content,
+          'post_type'      => 'page',
+          'post_parent'    => ''
+          )
+      );
+  }
+}
+add_action( 'init', 'wpsd_create_thank_you_page' );
 
 // Donate link to plugin description
 function wpsd_plugin_row_meta( $links, $file ) {

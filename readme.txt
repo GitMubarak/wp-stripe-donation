@@ -48,6 +48,7 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 * Donator Phone Label Option
 * Donate Amount Label Option
 * Set various donate amount from admin panel like 100, 200, 500 etc.
+* Email sending to Donor with donation information
 
 
 ➡️ Useage of Shortcode:⬅️
@@ -130,11 +131,14 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 == Changelog ==
 
 = 1.5 =
-* Donate amount option added
+* Various donate amount option added
 * Show/Hide Banner option added
 * Show/Hide Header option added
-* Showing donation data in descending order
+* Showing donation information in descending order in admin panel
 * Autocomplete turned off in donation form
+* Decimal amount issue fixed
+* Email sending to Donor with donation information added
+* Showing thank you page after successful donation
 
 = 1.4 =
 * Display Header option added

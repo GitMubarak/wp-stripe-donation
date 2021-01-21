@@ -5,20 +5,6 @@
 
     var wpsdDonateAmount = 0;
 
-    $('#wpsd_donate_other_amount').on('keyup', function(e) {
-
-        $("#wpsd-donation-form-id input[type='radio']").prop("checked", false);
-
-        if (/^(\d+(\.\d{0,2})?)?$/.test($(this).val())) {
-            // Input is OK. Remember this value
-            $(this).data('prevValue', $(this).val());
-        } else {
-            // Input is not OK. Restore previous value
-            $(this).val($(this).data('prevValue') || '');
-        }
-    }); //.trigger('input'); // Initialise the `prevValue` data properties
-
-
     if (typeof(StripeCheckout) !== "undefined") {
 
         $("#wpsd-donation-form-id input[type='radio']").on("click", function() {
@@ -40,6 +26,19 @@
 
         });
         */
+        $('#wpsd_donate_other_amount').on('keyup', function(e) {
+
+            $("#wpsd-donation-form-id input[type='radio']").prop("checked", false);
+
+            if (/^(\d+(\.\d{0,2})?)?$/.test($(this).val())) {
+                // Input is OK. Remember this value
+                $(this).data('prevValue', $(this).val());
+            } else {
+                // Input is not OK. Restore previous value
+                $(this).val($(this).data('prevValue') || '');
+            }
+        }); //.trigger('input'); // Initialise the `prevValue` data properties
+
         var wpsdHandler = StripeCheckout.configure({
             key: wpsdAdminScriptObj.stripePKey,
             image: wpsdAdminScriptObj.image,
@@ -62,7 +61,14 @@
                         currency: wpsdAdminScriptObj.currency,
                     },
                     success: function(response) {
-                        $('#wpsd-donation-message').show('slow').addClass(response.status).html(response.message);
+                        if (response.status === 'success') {
+                            var url = new URL(wpsdAdminScriptObj.successUrl);
+                            url.searchParams.set('donation', 'success');
+                            window.location.href = url.href;
+                        }
+                        if (response.status === 'error') {
+                            $('#wpsd-donation-message').show('slow').addClass(response.status).html(response.message);
+                        }
                     }
                 });
 
@@ -126,7 +132,7 @@
                 wpsdHandler.open({
                     name: wpsdAdminScriptObj.title,
                     description: 'Donation for ' + $("#wpsd_donation_for").val(),
-                    amount: wpsdDonateAmount,
+                    amount: wpsdDonateAmount * 100,
                     email: $("#wpsd_donator_email").val(),
                 });
             }
@@ -142,11 +148,6 @@
     function wpsd_validate_email($email) {
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return emailReg.test($email);
-    }
-
-    function wpsd_validate_other_amt(s) {
-        var rgx = /^[0-9]*\.?[0-9]*$/;
-        return s.match(rgx);
     }
 
 })(window, jQuery);

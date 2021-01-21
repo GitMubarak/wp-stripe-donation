@@ -1,10 +1,10 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Our main plugin class
  */
-class Wpsd_Master
-{
+class Wpsd_Master {
 
 	protected $wpsd_loader;
 	protected $wpsd_version;
@@ -26,8 +26,7 @@ class Wpsd_Master
 		load_plugin_textdomain(WPSD_TXT_DOMAIN, FALSE, WPSD_TXT_DOMAIN . '/languages/');
 	}
 
-	private function wpsd_load_dependencies()
-	{
+	private function wpsd_load_dependencies() {
 		require_once WPSD_PATH . 'inc/cls-hm-currency.php';
 		require_once WPSD_PATH . 'admin/' . WPSD_CLS_PRFX . 'admin.php';
 		require_once WPSD_PATH . 'front/' . WPSD_CLS_PRFX . 'front.php';
@@ -44,12 +43,12 @@ class Wpsd_Master
 		$this->wpsd_loader->add_action('wp_ajax_nopriv_wpsd_get_image', $wpsd_admin, 'wpsd_get_image');
 	}
 
-	private function wpsd_trigger_front_hooks()
-	{
+	private function wpsd_trigger_front_hooks() {
 		$wpsd_front = new Wpsd_Front($this->wpsd_version());
 		$this->wpsd_loader->add_action('wp_enqueue_scripts', $wpsd_front, WPSD_PRFX . 'front_assets');
 		$this->wpsd_loader->add_action('wp_ajax_wpsd_donation', $wpsd_front, 'wpsd_donation_handler');
 		$this->wpsd_loader->add_action('wp_ajax_nopriv_wpsd_donation', $wpsd_front, 'wpsd_donation_handler');
+		//$this->wpsd_loader->add_filter('page_template', $wpsd_front, 'wpsd_donation_success_template', 100);
 		$wpsd_front->wpsd_load_shortcode();
 	}
 
@@ -63,8 +62,7 @@ class Wpsd_Master
 		return $this->wpsd_version;
 	}
 
-	function wpsd_install_table()
-	{
+	function wpsd_install_table() {
 		global $wpdb;
 		$table_name = WPSD_TABLE;
 		$sql1 = "DROP TABLE IF EXISTS $table_name";

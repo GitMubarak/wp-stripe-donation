@@ -1,5 +1,4 @@
 <?php
-// Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
@@ -11,14 +10,13 @@ class Wpsd_Front
 
 	private $wpsd_version;
 
-	public function __construct($version)
-	{
+	function __construct( $version ) {
 		$this->wpsd_version = $version;
 		$this->wpsd_assets_prefix = substr(WPSD_PRFX, 0, -1) . '-';
 	}
 
-	public function wpsd_front_assets()
-	{
+	function wpsd_front_assets() {
+
 		wp_enqueue_style(
 			$this->wpsd_assets_prefix . 'front-style',
 			WPSD_ASSETS . 'css/' . $this->wpsd_assets_prefix . 'front-style.css',
@@ -26,6 +24,7 @@ class Wpsd_Front
 			$this->wpsd_version,
 			FALSE
 		);
+
 		if (!wp_script_is('jquery')) {
 			wp_enqueue_script('jquery');
 		}
@@ -38,6 +37,7 @@ class Wpsd_Front
 			$this->wpsd_version,
 			TRUE
 		);
+
 		$wpsdKeySettings = stripslashes_deep(unserialize(get_option('wpsd_key_settings')));
 		if (is_array($wpsdKeySettings)) {
 			$wpsdPrimaryKey = !empty($wpsdKeySettings['wpsd_private_key']) ? $wpsdKeySettings['wpsd_private_key'] : "";
@@ -71,17 +71,16 @@ class Wpsd_Front
 			'ajaxurl' 		=> admin_url('admin-ajax.php'),
 			'title'			=> $wpsdPaymentTitle,
 			'currency'		=> $wpsdDonateCurrency,
+			'successUrl'	=> get_site_url() . '/wpsd-thank-you',
 		);
 		wp_localize_script($this->wpsd_assets_prefix . 'front-script', 'wpsdAdminScriptObj', $wpsdAdminArray);
 	}
 
-	public function wpsd_load_shortcode()
-	{
+	function wpsd_load_shortcode() {
 		add_shortcode('wp_stripe_donation', array($this, 'wpsd_load_shortcode_view'));
 	}
 
-	public function wpsd_load_shortcode_view()
-	{
+	function wpsd_load_shortcode_view() {
 		$output = '';
 		ob_start();
 		include(plugin_dir_path(__FILE__) . '/view/wpsd-front-view.php');
@@ -104,17 +103,14 @@ class Wpsd_Front
 			&& ! empty( $_POST['donation_for'] )
 		) {
 			
-
-			$wpsdDonationFor 	= sanitize_text_field($_POST['donation_for']);
-			$wpsdName 			= sanitize_text_field($_POST['name']);
-			$wpsdEmail 			= sanitize_email($_POST['email']);
-			$wpsdPhone 			= intval($_POST['phone']);
+			$wpsdDonationFor 	= sanitize_text_field( $_POST['donation_for'] );
+			$wpsdName 			= sanitize_text_field( $_POST['name'] );
+			$wpsdEmail 			= sanitize_email( $_POST['email'] );
+			$wpsdPhone 			= sanitize_text_field( $_POST['phone'] );
 			$wpsdAmount 		= filter_var( $_POST['amount'], FILTER_SANITIZE_STRING );
 			$wpsdCurrency 		= sanitize_text_field( $_POST['currency'] );
 			$wpsdStripeKey 		= sanitize_text_field( $_POST['wpsdSecretKey'] );
 			$wpsdToken 			= sanitize_text_field( $_POST['token'] );
-			
-			//require_once "Stripe/Stripe.php";
 			
 			require_once( WPSD_PATH . 'front/Stripe/Stripe.php' );
 			
@@ -124,28 +120,38 @@ class Wpsd_Front
 			try {
 				
 				$charge = Stripe_Charge::create( array(
-					"amount" 		=> $wpsdAmount,
+					"amount" 		=> $wpsdAmount * 100,
 					"currency" 		=> $wpsdCurrency,
 					"card" 			=> $wpsdToken,
-					"description" 	=> 'aaaa', //$wpsdName . " (" . $wpsdPhone . ") donated for " . $wpsdDonationFor
+					"description" 	=> $wpsdName . " (" . $wpsdPhone . ") donated for " . $wpsdDonationFor
 				));
-				//echo WPSD_PATH; die();
-				/*
+				
 				$wpsdGeneralSettings 	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
 				$wpsdDonationEmail 		= isset( $wpsdGeneralSettings['wpsd_donation_email'] ) ? $wpsdGeneralSettings['wpsd_donation_email'] : '';
 				
 				// Send the email if the charge successful.
-				$wpsdEmailSubject = "You have a Donation for - " . $wpsdDonationFor;
+				$wpsdEmailSubject = __('You have a Donation for - ') . $wpsdDonationFor;
 
-				$wpsdEmailMessage = "Name: " . $wpsdName . "<br>Email: " . $wpsdEmail . "<br>Amount: " . $wpsdAmount . $wpsdCurrency . "<br>For: " . $wpsdDonationFor . "<br>";
+				$wpsdEmailMessage = __('Name: ') . $wpsdName;
+				$wpsdEmailMessage .= '<br>' . __('Email: ') . $wpsdEmail;
+				$wpsdEmailMessage .= '<br>' . __('Amount: ') . $wpsdAmount . $wpsdCurrency;
+				$wpsdEmailMessage .= '<br>' . __('For: ') . $wpsdDonationFor;
 
-				if ( $wpsdPhone ) {
-					$wpsdEmailMessage .= "Phone: " . $wpsdPhone . "<br>";
-				}
+				$wpsdEmailMessage .= isset( $wpsdPhone ) ? '<br>' . __('Phone: ') . $wpsdPhone : '';
 
 				$headers = array('Content-Type: text/html; charset=UTF-8');
 
-				wp_mail( $wpsdDonationEmail, $wpsdEmailSubject, $wpsdEmailMessage, $headers );
+				if ( '' !== $wpsdDonationEmail ) {
+					wp_mail( $wpsdDonationEmail, $wpsdEmailSubject, $wpsdEmailMessage, $headers );
+				}
+
+				$donorEmailSubject = __('Thank you for your donation');
+				$donorEmailMessage = __('Hello ') . $wpsdName;
+				$donorEmailMessage .= '<br>' . __('Thank you for your donation');
+				$donorEmailMessage .= '<br>' . __('Donated amount: ') . $wpsdAmount . $wpsdCurrency;
+				$donorEmailMessage .= '<br>' . __('Donated for: ') . $wpsdDonationFor;
+				
+				wp_mail( $wpsdEmail, $donorEmailSubject, $donorEmailMessage, $headers );
 
 				$wpdb->query('INSERT INTO ' . $tableData . ' (
 															wpsd_donation_for,
@@ -164,7 +170,7 @@ class Wpsd_Front
 															"' . date('Y-m-d h:i:s') . '"
 													)
 												');
-				*/
+
 				// Upon Successful transaction, reply an Success message
 				die( json_encode( array(
 					"status" => "success",
@@ -180,5 +186,17 @@ class Wpsd_Front
 				) ) );
 			}
 		}
+	}
+
+	function wpsd_donation_success_template( $template ) {
+
+		global $post;
+		
+		if ( 'wpsd-thank-you' == $post->post_name ) {
+			return WPSD_PATH . 'front/view/wpsd-donation-success.php';
+		}
+
+		return $template;
+
 	}
 }
