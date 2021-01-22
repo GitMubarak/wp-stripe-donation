@@ -1,4 +1,4 @@
-=== Stripe Donations ===
+=== WordPress Stripe Donations ===
 Contributors: mhmrajib, hmplugin
 Donate link: https://www.paypal.me/mhmrajib
 Tags: charity, donate, donation, donations, stripe
@@ -136,9 +136,11 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 * Show/Hide Header option added
 * Showing donation information in descending order in admin panel
 * Autocomplete turned off in donation form
-* Decimal amount issue fixed
+* Decimal amount issue fixed like 100.50
 * Email sending to Donor with donation information added
 * Showing thank you page after successful donation
+* Donor email not passed to Stripe issue fixed
+* Code optimized and minor bug fixed
 
 = 1.4 =
 * Display Header option added

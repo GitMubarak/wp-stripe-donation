@@ -119,11 +119,12 @@ class Wpsd_Front
 			// Transaction starting
 			try {
 				
-				$charge = Stripe_Charge::create( array(
-					"amount" 		=> $wpsdAmount * 100,
-					"currency" 		=> $wpsdCurrency,
-					"card" 			=> $wpsdToken,
-					"description" 	=> $wpsdName . " (" . $wpsdPhone . ") donated for " . $wpsdDonationFor
+				Stripe_Charge::create( array(
+					'amount' 			=> __($wpsdAmount * 100),
+					'currency' 			=> __($wpsdCurrency),
+					'source' 			=> __($wpsdToken),
+					'description' 		=> __($wpsdName) . ' (' . __($wpsdPhone) . ') ' . __('donated for ') . __($wpsdDonationFor),
+					'receipt_email'		=> __($wpsdEmail)
 				));
 				
 				$wpsdGeneralSettings 	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );

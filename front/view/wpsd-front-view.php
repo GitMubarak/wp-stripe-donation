@@ -72,7 +72,7 @@ $wpsdDonOpVals = ($wpsdDonationOptions != '') ? explode(',', $wpsdDonationOption
             <legend style="padding:0 20px; margin:0 auto;"><?php echo esc_html( $wpsdPaymentTitle ); ?></legend>
         </fieldset>
 
-        <form action="" method="POST" id="wpsd-donation-form-id" autocomplete="on">
+        <form action="" method="POST" id="wpsd-donation-form-id" autocomplete="off">
             <!-- Input section -->
             <label for="wpsd_donation_for" class="wpsd-donation-form-label"><?php echo esc_html( $wpsd_donation_for_label ); ?>:</label>
             <select name="wpsd_donation_for" id="wpsd_donation_for" class="wpsd-text-field">
