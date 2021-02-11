@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/mhmrajib
 Tags: charity, donate, donation, donations, stripe
 Requires at least: 4.6
 Tested up to: 5.6
-Stable tag: 1.5
+Stable tag: 2.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -60,12 +60,13 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 
 **👨‍💻 Demo / Support/ Live Chat**
 
-[Stripe Donations: See Demo](https://demo.hmplugin.com/wp-stripe-donation/)
+[Stripe Donations: See Demo](https://demo.hmplugin.com/wordpress-stripe-donation-plugin/)
 
 
 **👍 Give us a Feedback/Rating**
 
 If you find this plugin helpful, feel free to give us your valuable review. Rate us and share this plugin with your friends. This will motivate us and help us to grow.
+[Rate Us](https://wordpress.org/support/plugin/wp-stripe-donation/reviews/#new-post)
 
 
 **🔥 Other Plugins from [HM Plugin](https://hmplugin.com):**
@@ -129,6 +130,9 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 
 == Changelog ==
+
+= 2.0 =
+* Various donate amount option added
 
 = 1.5 =
 * Various donate amount option added
