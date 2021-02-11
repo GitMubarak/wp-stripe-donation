@@ -132,7 +132,8 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 == Changelog ==
 
 = 2.0 =
-* Various donate amount option added
+* Show/Hide Phone Option Added
+* Other Amount Text Option Added
 
 = 1.5 =
 * Various donate amount option added
