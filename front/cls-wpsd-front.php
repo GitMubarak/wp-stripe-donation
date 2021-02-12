@@ -93,6 +93,7 @@ class Wpsd_Front {
 				'amount' 		=> $wpsdAmount * 100,
 				'currency' 		=> $wpsdCurrency,
 				'description'	=> $wpsdName . __(' donated for ', WPSD_TXT_DOMAIN) . $wpsdDonationFor,
+				'receipt_email'	=> $wpsdEmail,
 				// Verify your integration in this guide by including this parameter
 				'metadata' 		=> ['integration_check' => 'accept_a_payment'],
 			], [
