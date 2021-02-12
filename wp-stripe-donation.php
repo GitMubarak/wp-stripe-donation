@@ -70,4 +70,4 @@ function wpsd_plugin_row_meta( $links, $file ) {
 }
 add_filter( 'plugin_row_meta', 'wpsd_plugin_row_meta', 10, 2 );
 
-register_deactivation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'unregister_settings'));
+//register_deactivation_hook(__FILE__, array($wpsd, WPSD_PRFX . 'unregister_settings'));

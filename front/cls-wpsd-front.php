@@ -172,7 +172,7 @@ class Wpsd_Front {
 		
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 
-		$wpsdEmailSubject = __('You have a Donation for - ') . $wpsdDonationFor;
+		$wpsdEmailSubject = __('New Donation Received!');
 		$wpsdEmailMessage = __('Name: ') . $wpsdName;
 		$wpsdEmailMessage .= '<br>' . __('Email: ') . $wpsdEmail;
 		$wpsdEmailMessage .= '<br>' . __('Amount: ') . $wpsdAmount . $wpsdCurrency;
