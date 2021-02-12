@@ -63,7 +63,7 @@ $wpsd_other_amount_text     = isset( $wpsdTempSettings['wpsd_other_amount_text']
                                     <input type="radio" name="wpsd_select_template"
                                         id="<?php printf('wpsd_select_template_%d', $i); ?>" value="<?php printf('%d', $i); ?>"
                                         <?php if ( $wpsdSelectTemp == $i ) echo 'checked'; ?>>
-                                    <label class="wpsd-template-<?php printf('%d', $i); ?>"></label>
+                                    <label for="<?php printf('wpsd_select_template_%d', $i); ?>" class="wpsd-template-<?php printf('%d', $i); ?>"></label>
                                 </div>
                                 <?php endfor; ?>
                             </div>

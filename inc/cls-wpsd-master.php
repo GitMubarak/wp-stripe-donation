@@ -48,6 +48,8 @@ class Wpsd_Master {
 		$this->wpsd_loader->add_action('wp_enqueue_scripts', $wpsd_front, WPSD_PRFX . 'front_assets');
 		$this->wpsd_loader->add_action('wp_ajax_wpsd_donation', $wpsd_front, 'wpsd_donation_handler');
 		$this->wpsd_loader->add_action('wp_ajax_nopriv_wpsd_donation', $wpsd_front, 'wpsd_donation_handler');
+		$this->wpsd_loader->add_action('wp_ajax_wpsd_donation_success', $wpsd_front, 'wpsd_donation_handler_success');
+		$this->wpsd_loader->add_action('wp_ajax_nopriv_wpsd_donation_success', $wpsd_front, 'wpsd_donation_handler_success');
 		//$this->wpsd_loader->add_filter('page_template', $wpsd_front, 'wpsd_donation_success_template', 100);
 		$wpsd_front->wpsd_load_shortcode();
 	}

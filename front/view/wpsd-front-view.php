@@ -129,8 +129,15 @@ $wpsdDonOpVals = ( $wpsdDonationOptions != '' ) ? explode(',', $wpsdDonationOpti
                     </div>
                 </li>
             </ul>
+
+            <!--card--->
+            <label class="wpsd-donation-form-label">Card Details</label>
+            <div id="card-element"></div>
+            <div id="card-errors" class="wpsd-alert" role="alert"></div>
+            <!---card end-->
+            <br>
             <input type="submit" name="wpsd-donate-button" class="wpsd-donate-button"
-                value="<?php echo esc_attr($wpsdDonateButtonText); ?>">
+                value="<?php echo esc_attr( $wpsdDonateButtonText ); ?>">
         </form>
 
         <!-- p class="wpsd-total-donation-today">
@@ -138,6 +145,5 @@ $wpsdDonOpVals = ( $wpsdDonationOptions != '' ) ? explode(',', $wpsdDonationOpti
                 <?php //echo esc_html($wpsdDonateCurrency); 
                 ?></span>&nbsp;Donation Today
         </p -->
-        <span id="wpsd-donation-message" class="wpsd-alert">&nbsp;</span>
     </div>
 </div>

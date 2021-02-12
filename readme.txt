@@ -132,8 +132,13 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 == Changelog ==
 
 = 2.0 =
+* Stripe SCA compliance integrated with 3D security
+* Payment Modal removed
+* Inline payment field integrated
 * Show/Hide Phone Option Added
 * Other Amount Text Option Added
+* Code improved
+* Styles updated
 
 = 1.5 =
 * Various donate amount option added
