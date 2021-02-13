@@ -6,9 +6,9 @@ if ( ! defined('WP_UNINSTALL_PLUGIN') ) {
 
 global $wpdb;
 $option_name    = 'wporg_option';
-$table_name     = WPSD_TABLE;
+$table_name     = $wpdb->prefix . 'wpsd_stripe_donation';
 $tbl            = $wpdb->prefix . 'options';
-$search_string  = WPSD_PRFX . '%';
+$search_string  = 'wpsd_%';
 
 $sql            = $wpdb->prepare("SELECT option_name FROM $tbl WHERE option_name LIKE %s", $search_string);
 $options        = $wpdb->get_results($sql, OBJECT);
