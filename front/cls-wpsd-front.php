@@ -112,9 +112,36 @@ class Wpsd_Front {
 						'message' => 'Something went wrong!'
 					) ) );
 				}
-			}
+			} 
 			catch ( \Stripe\Exception\CardException $e ) {
 				echo '<pre>';
+				print_r( $e );
+			}
+			catch (\Stripe\Exception\RateLimitException $e) {
+			  	// Too many requests made to the API too quickly
+				echo '<pre>';
+				print_r( $e );
+			} catch (\Stripe\Exception\InvalidRequestException $e) {
+			  	// Invalid parameters were supplied to Stripe's API
+			  	echo '<pre>';
+				print_r( $e );
+			} catch (\Stripe\Exception\AuthenticationException $e) {
+				// Authentication with Stripe's API failed
+				// (maybe you changed API keys recently)
+				echo '<pre>';
+				print_r( $e );
+			} catch (\Stripe\Exception\ApiConnectionException $e) {
+			  	// Network communication with Stripe failed
+			  	echo '<pre>';
+				print_r( $e );
+			} catch (\Stripe\Exception\ApiErrorException $e) {
+			  	// Display a very generic error to the user, and maybe send
+			  	// yourself an email
+			  	echo '<pre>';
+				print_r( $e );
+			} catch (Exception $e) {
+			  	// Something else happened, completely unrelated to Stripe
+			  	echo '<pre>';
 				print_r( $e );
 			}
 		}
