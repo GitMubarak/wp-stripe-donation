@@ -3,6 +3,7 @@
     // USE STRICT
     "use strict";
 
+    var form = document.getElementById('wpsd-donation-form-id');
     var stripe = Stripe(wpsdAdminScriptObj.stripePKey);
     var elements = stripe.elements();
     var wpsdDonateAmount = 0;
@@ -29,14 +30,11 @@
         }
     });
 
-    var form = document.getElementById('wpsd-donation-form-id');
-
     form.addEventListener('submit', function(e) {
 
         e.preventDefault();
         var wpsdShowCheckout = true;
-
-        if ($("#wpsd_donation_for").val() == '') {
+        if (($("#wpsd_donation_for").val() == '') || ($("#wpsd_donation_for").val() == null)) {
             $('#card-errors').show('slow').addClass('error').html('Please Enter Donation For');
             $("#wpsd_donation_for").focus();
             return false;

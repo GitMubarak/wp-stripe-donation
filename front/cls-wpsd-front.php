@@ -41,7 +41,7 @@ class Wpsd_Front {
 		$wpsdSecretKey 			= isset( $wpsdKeySettings['wpsd_secret_key'] ) ? $wpsdKeySettings['wpsd_secret_key'] : '';
 
 		$wpsdGeneralSettings	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
-		$wpsdDonateCurrency 	= isset( $wpsdKeySettings['wpsd_donate_currency'] ) ? $wpsdGeneralSettings['wpsd_donate_currency'] : 'USD';
+		$wpsdDonateCurrency 	= isset( $wpsdGeneralSettings['wpsd_donate_currency'] ) ? $wpsdGeneralSettings['wpsd_donate_currency'] : 'USD';
 
 		$wpsdAdminArray = array(
 			'stripePKey'	=> $wpsdPrimaryKey,
@@ -89,27 +89,33 @@ class Wpsd_Front {
 			
 			\Stripe\Stripe::setApiKey( base64_decode( $wpsdStripeKey ) );
 
-			$intent = \Stripe\PaymentIntent::create([
-				'amount' 		=> $wpsdAmount * 100,
-				'currency' 		=> $wpsdCurrency,
-				'description'	=> $wpsdName . __(' donated for ', WPSD_TXT_DOMAIN) . $wpsdDonationFor,
-				'receipt_email'	=> $wpsdEmail,
-				// Verify your integration in this guide by including this parameter
-				'metadata' 		=> ['integration_check' => 'accept_a_payment'],
-			], [
-				'idempotency_key' => $idempotency
-			 ] );
-			
-			if ( '' !== $intent->client_secret ) {
-				die( json_encode( array(
-					'status' => 'success',
-					'client_secret' => $intent->client_secret
-				) ) );
-			} else {
-				die( json_encode( array(
-					'status' => 'error',
-					'message' => 'Something went wrong!'
-				) ) );
+			try {
+				$intent = \Stripe\PaymentIntent::create([
+					'amount' 		=> $wpsdAmount * 100,
+					'currency' 		=> $wpsdCurrency,
+					'description'	=> $wpsdDonationFor,
+					'receipt_email'	=> $wpsdEmail,
+					// Verify your integration in this guide by including this parameter
+					'metadata' 		=> ['integration_check' => 'accept_a_payment'],
+				], [
+					'idempotency_key' => $idempotency
+				] );
+				
+				if ( '' !== $intent->client_secret ) {
+					die( json_encode( array(
+						'status' => 'success',
+						'client_secret' => $intent->client_secret
+					) ) );
+				} else {
+					die( json_encode( array(
+						'status' => 'error',
+						'message' => 'Something went wrong!'
+					) ) );
+				}
+			}
+			catch ( \Stripe\Exception\CardException $e ) {
+				echo '<pre>';
+				print_r( $e );
 			}
 		}
 	}

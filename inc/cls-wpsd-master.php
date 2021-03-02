@@ -12,8 +12,7 @@ class Wpsd_Master {
 	/**
 	 * Class Constructor
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->wpsd_version = WPSD_VERSION;
 		add_action('plugins_loaded', array($this, WPSD_PRFX . 'load_plugin_textdomain'));
 		$this->wpsd_load_dependencies();
@@ -21,8 +20,7 @@ class Wpsd_Master {
 		$this->wpsd_trigger_front_hooks();
 	}
 
-	function wpsd_load_plugin_textdomain()
-	{
+	function wpsd_load_plugin_textdomain() {
 		load_plugin_textdomain(WPSD_TXT_DOMAIN, FALSE, WPSD_TXT_DOMAIN . '/languages/');
 	}
 
@@ -34,8 +32,7 @@ class Wpsd_Master {
 		$this->wpsd_loader = new Wpsd_Loader();
 	}
 
-	private function wpsd_trigger_admin_hooks()
-	{
+	private function wpsd_trigger_admin_hooks() {
 		$wpsd_admin = new Wpsd_Admin($this->wpsd_version());
 		$this->wpsd_loader->add_action('admin_menu', $wpsd_admin, WPSD_PRFX . 'admin_menu');
 		$this->wpsd_loader->add_action('admin_enqueue_scripts', $wpsd_admin, WPSD_PRFX . 'admin_assets');
@@ -54,13 +51,11 @@ class Wpsd_Master {
 		$wpsd_front->wpsd_load_shortcode();
 	}
 
-	function wpsd_run()
-	{
+	function wpsd_run() {
 		$this->wpsd_loader->wpsd_run();
 	}
 
-	function wpsd_version()
-	{
+	function wpsd_version() {
 		return $this->wpsd_version;
 	}
 
@@ -87,8 +82,7 @@ class Wpsd_Master {
 		}
 	}
 
-	function wpsd_unregister_settings()
-	{
+	function wpsd_unregister_settings() {
 		global $wpdb;
 
 		$tbl = $wpdb->prefix . 'options';
