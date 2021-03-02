@@ -142,7 +142,6 @@ class Wpsd_Admin
 			'wpsd_donation_for'			=> esc_html__('Donation For', WPSD_TXT_DOMAIN),
 			'wpsd_donator_name'			=> esc_html__('Name', WPSD_TXT_DOMAIN),
 			'wpsd_donator_email'		=> esc_html__('Email', WPSD_TXT_DOMAIN),
-			'wpsd_donator_phone'		=> esc_html__('Phone', WPSD_TXT_DOMAIN),
 			'wpsd_donation_datetime'	=> esc_html__('Date', WPSD_TXT_DOMAIN)
 		);
 		register_column_headers('wpsd-column-table', $wpsdColumns);

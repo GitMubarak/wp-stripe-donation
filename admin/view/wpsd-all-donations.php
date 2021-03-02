@@ -18,11 +18,10 @@ $wpsdDonateCurrency     = isset( $wpsdGeneralSettings['wpsd_donate_currency'] ) 
                     ?>
                     <tr>
                         <td class="wpsd-donated-amount"><?php printf('%s', $donation->wpsd_donated_amount); ?></td>
-                        <td><?php esc_html_e( $wpsdDonateCurrency ); ?></td>
+                        <td><?php printf('%s', $donation->wpsd_donator_phone); ?></td>
                         <td><?php printf('%s', $donation->wpsd_donation_for); ?></td>
                         <td><?php printf('%s', $donation->wpsd_donator_name); ?></td>
                         <td><?php printf('%s', $donation->wpsd_donator_email); ?></td>
-                        <td><?php printf('%s', $donation->wpsd_donator_phone); ?></td>
                         <td><?php printf('%s', date('D d M Y - h:i A', strtotime($donation->wpsd_donation_datetime))); ?>
                         </td>
                     </tr>

@@ -176,14 +176,14 @@ class Wpsd_Front {
 			}
 			
 			// Save data to database
-			$this->wpsd_save_donation_info( $wpsdDonationFor, $wpsdName, $wpsdEmail, $wpsdAmount );
+			$this->wpsd_save_donation_info( $wpsdDonationFor, $wpsdName, $wpsdEmail, $wpsdAmount, $wpsdCurrency );
 
 			// Upon Successful transaction, reply an Success message
 			die( json_encode( array( 'status' => 'success' ) ) );
 		}
 	}
 
-	function wpsd_save_donation_info( $wpsdDonationFor, $wpsdName, $wpsdEmail, $wpsdAmount ) {
+	function wpsd_save_donation_info( $wpsdDonationFor, $wpsdName, $wpsdEmail, $wpsdAmount, $wpsdCurrency ) {
 
 		global $wpdb;
 
@@ -191,12 +191,14 @@ class Wpsd_Front {
 			wpsd_donation_for,
 			wpsd_donator_name,
 			wpsd_donator_email,
+			wpsd_donator_phone,
 			wpsd_donated_amount,
 			wpsd_donation_datetime
 		) VALUES (
 			"' . $wpsdDonationFor . '",
 			"' . $wpsdName . '",
 			"' . $wpsdEmail . '",
+			"' . $wpsdCurrency . '",
 			"' . $wpsdAmount . '",
 			"' . date('Y-m-d h:i:s') . '"
 		)');
