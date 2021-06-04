@@ -6,14 +6,14 @@ if( isset( $_POST['updateTempSettings'] ) ) {
         'wpsd_select_template'      => ( filter_var( $_POST['wpsd_select_template'], FILTER_SANITIZE_STRING ) ) ? $_POST['wpsd_select_template'] : 0,
         'wpsd_display_banner'       => isset( $_POST['wpsd_display_banner'] ) && filter_var( $_POST['wpsd_display_banner'], FILTER_SANITIZE_NUMBER_INT ) ? $_POST['wpsd_display_banner'] : '',
         'wpsd_form_banner'          => ( sanitize_file_name( $_POST['wpsd_form_banner'] ) != '' ) ? sanitize_file_name( $_POST['wpsd_form_banner'] ) : '',
-        'wpsd_display_header'       => isset( $_POST['wpsd_display_header'] ) && filter_var( $_POST['wpsd_display_header'], FILTER_SANITIZE_NUMBER_INT ) ? $_POST['wpsd_display_header'] : '',
         'wpsd_donation_for_label'   => ( sanitize_text_field( $_POST['wpsd_donation_for_label'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donation_for_label'] ) : 'Donation For',
         'wpsd_donator_name_label'   => ( sanitize_text_field( $_POST['wpsd_donator_name_label'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donator_name_label'] ) : 'Donator Name',
         'wpsd_donator_email_label'  => ( sanitize_text_field( $_POST['wpsd_donator_email_label'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donator_email_label'] ) : 'Donator Email',
-        'wpsd_donator_phone_label'  => ( sanitize_text_field( $_POST['wpsd_donator_phone_label'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donator_phone_label'] ) : 'Donator Phone',
+        //'wpsd_donator_phone_label'  => ( sanitize_text_field( $_POST['wpsd_donator_phone_label'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donator_phone_label'] ) : 'Donator Phone',
         'wpsd_donate_amount_label'  => ( sanitize_text_field( $_POST['wpsd_donate_amount_label'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_donate_amount_label'] ) : 'Donate Amount',
-        'wpsd_display_phone'        => isset( $_POST['wpsd_display_phone'] ) && filter_var( $_POST['wpsd_display_phone'], FILTER_SANITIZE_NUMBER_INT ) ? $_POST['wpsd_display_phone'] : '',
+        //'wpsd_display_phone'        => isset( $_POST['wpsd_display_phone'] ) && filter_var( $_POST['wpsd_display_phone'], FILTER_SANITIZE_NUMBER_INT ) ? $_POST['wpsd_display_phone'] : '',
         'wpsd_other_amount_text'    => ( sanitize_text_field( $_POST['wpsd_other_amount_text'] ) != '' ) ? sanitize_text_field( $_POST['wpsd_other_amount_text'] ) : '',
+        'wpsd_hide_label'           => isset( $_POST['wpsd_hide_label'] ) && filter_var( $_POST['wpsd_hide_label'], FILTER_SANITIZE_NUMBER_INT ) ? $_POST['wpsd_hide_label'] : '',
     );
 
     $wpsdTempShowMessage = update_option('wpsd_temp_settings', serialize( $wpsdTempSettingsInfo ) );
@@ -23,14 +23,14 @@ $wpsdTempSettings           = stripslashes_deep( unserialize( get_option('wpsd_t
 $wpsdSelectTemp             = isset( $wpsdTempSettings['wpsd_select_template'] ) ? $wpsdTempSettings['wpsd_select_template'] : 0;
 $wpsdFormBanner             = isset( $wpsdTempSettings['wpsd_form_banner'] ) ? $wpsdTempSettings['wpsd_form_banner'] : '';
 $wpsd_display_banner        = isset( $wpsdTempSettings['wpsd_display_banner'] ) ? $wpsdTempSettings['wpsd_display_banner'] : '';
-$wpsd_display_header        = isset( $wpsdTempSettings['wpsd_display_header'] ) ? $wpsdTempSettings['wpsd_display_header'] : '';
 $wpsd_donation_for_label    = isset( $wpsdTempSettings['wpsd_donation_for_label'] ) ? $wpsdTempSettings['wpsd_donation_for_label'] : 'Donation For';
 $wpsd_donator_name_label    = isset( $wpsdTempSettings['wpsd_donator_name_label'] ) ? $wpsdTempSettings['wpsd_donator_name_label'] : 'Donator Name';
 $wpsd_donator_email_label   = isset( $wpsdTempSettings['wpsd_donator_email_label'] ) ? $wpsdTempSettings['wpsd_donator_email_label'] : 'Donator Email';
-$wpsd_donator_phone_label   = isset( $wpsdTempSettings['wpsd_donator_phone_label'] ) ? $wpsdTempSettings['wpsd_donator_phone_label'] : 'Donator Phone';
+//$wpsd_donator_phone_label   = isset( $wpsdTempSettings['wpsd_donator_phone_label'] ) ? $wpsdTempSettings['wpsd_donator_phone_label'] : 'Donator Phone';
 $wpsd_donate_amount_label   = isset( $wpsdTempSettings['wpsd_donate_amount_label'] ) ? $wpsdTempSettings['wpsd_donate_amount_label'] : 'Donate Amount';
-$wpsd_display_phone         = isset( $wpsdTempSettings['wpsd_display_phone'] ) ? $wpsdTempSettings['wpsd_display_phone'] : '';
+//$wpsd_display_phone         = isset( $wpsdTempSettings['wpsd_display_phone'] ) ? $wpsdTempSettings['wpsd_display_phone'] : '';
 $wpsd_other_amount_text     = isset( $wpsdTempSettings['wpsd_other_amount_text'] ) ? $wpsdTempSettings['wpsd_other_amount_text'] : '';
+$wpsd_hide_label            = isset( $wpsdTempSettings['wpsd_hide_label'] ) ? $wpsdTempSettings['wpsd_hide_label'] : 1;
 ?>
 <div id="wpsd-wrap-all" class="wrap wpsd-template-settings">
 
@@ -54,7 +54,7 @@ $wpsd_other_amount_text     = isset( $wpsdTempSettings['wpsd_other_amount_text']
                     <tr class="wpsd_select_template">
                         <th scope="row">
                             <label
-                                for="wpsd_select_template"><?php _e('Select a Template:', WPSD_TXT_DOMAIN); ?></label>
+                                for="wpsd_select_template"><?php _e('Template Color:', WPSD_TXT_DOMAIN); ?></label>
                         </th>
                         <td>
                             <div class="wpsd-template-selector">
@@ -98,14 +98,6 @@ $wpsd_other_amount_text     = isset( $wpsdTempSettings['wpsd_other_amount_text']
                             </div>
                         </td>
                     </tr>
-                    <tr class="wpsd_display_header">
-                        <th scope="row">
-                            <label for="wpsd_display_header"><?php _e('Display Header:', WPSD_TXT_DOMAIN); ?></label>
-                        </th>
-                        <td>
-                            <input type="checkbox" name="wpsd_display_header" class="wpsd_display_header" id="wpsd_display_header" value="1" <?php if( '1' === $wpsd_display_header ) { echo 'checked'; } ?> >
-                        </td>
-                    </tr>
                     <tr class="wpsd_donation_for_label">
                         <th scope="row">
                             <label for="wpsd_donation_for_label"><?php _e('Donation For Label:', WPSD_TXT_DOMAIN); ?></label>
@@ -133,23 +125,6 @@ $wpsd_other_amount_text     = isset( $wpsdTempSettings['wpsd_other_amount_text']
                                 value="<?php echo esc_attr( $wpsd_donator_email_label ); ?>">
                         </td>
                     </tr>
-                    <tr class="wpsd_display_phone">
-                        <th scope="row">
-                            <label for="wpsd_display_phone"><?php _e('Display Phone:', WPSD_TXT_DOMAIN); ?></label>
-                        </th>
-                        <td>
-                            <input type="checkbox" name="wpsd_display_phone" class="wpsd_display_phone" id="wpsd_display_phone" value="1" <?php echo $wpsd_display_phone ? 'checked' : ''; ?> >
-                        </td>
-                    </tr>
-                    <tr class="wpsd_donator_phone_label">
-                        <th scope="row">
-                            <label for="wpsd_donator_phone_label"><?php _e('Donator Phone Label:', WPSD_TXT_DOMAIN); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" name="wpsd_donator_phone_label" class="medium-text" placeholder="Donator Phone"
-                                value="<?php echo esc_attr( $wpsd_donator_phone_label ); ?>">
-                        </td>
-                    </tr>
                     <tr class="wpsd_donate_amount_label">
                         <th scope="row">
                             <label for="wpsd_donate_amount_label"><?php _e('Donate Amount Label:', WPSD_TXT_DOMAIN); ?></label>
@@ -157,6 +132,14 @@ $wpsd_other_amount_text     = isset( $wpsdTempSettings['wpsd_other_amount_text']
                         <td>
                             <input type="text" name="wpsd_donate_amount_label" class="medium-text" placeholder="Donate Amount"
                                 value="<?php echo esc_attr( $wpsd_donate_amount_label ); ?>">
+                        </td>
+                    </tr>
+                    <tr class="wpsd_hide_label">
+                        <th scope="row">
+                            <label for="wpsd_hide_label"><?php _e('Hide Label:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="checkbox" name="wpsd_hide_label" class="wpsd_hide_label" id="wpsd_hide_label" value="1" <?php echo $wpsd_hide_label ? 'checked' : ''; ?> >
                         </td>
                     </tr>
                     <tr class="wpsd_other_amount_text">

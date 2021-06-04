@@ -39,23 +39,31 @@
 }
 
 .wpsd-master-wrapper {
-    box-shadow: 0 3px 20px #C0C0C0;
+    box-shadow: 0 3px 10px #555555;
     margin: 15px 0;
+    padding-top: 30px;
 }
 
-.wpsd-master-wrapper .wpsd-wrapper-header {
-    background: #000;
-    padding: 20px 15px;
+.wpsd-master-wrapper h3.wpsd-form-title {
+    font-size: 26px;
+    margin-bottom: 16px;
     text-align: center;
 }
 
-.wpsd-master-wrapper .wpsd-wrapper-header h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 30px;
-    line-height: 30px;
-    font-weight: 600;
-    color: #ffffff;
+.wpsd-form-title-border {
+    height: 4px;
+    width: 100px;
+    margin: 0 auto;
+    background-color: #24B47E;
+    border-radius: 4px;
+}
+
+.wpsd-form-description {
+    color: #555;
+    font-size: 16px;
+    margin: 18px 0px 30px 0px;
+    width: 100%;
+    text-align: center;
 }
 
 img.wpsd-form-banner {
@@ -98,25 +106,24 @@ img.wpsd-form-banner {
 
 .wpsd-master-wrapper .wpsd-wrapper-content .wpsd-text-field {
     width: 100%;
-    border: 1px solid #808080;
+    border: 1px solid #dddddd;
     padding: 10px 15px;
     height: auto;
     font-size: 13px;
     line-height: 18px;
-    border-radius: 5px;
-    box-shadow: 0 0px 15px #C0C0C0;
+    border-radius: 4px;
     transition: all 0.3s linear;
     margin: 0 0 20px;
     outline: none;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content .wpsd-text-field::placeholder {
-    color: #798096;
+    color: #000;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content .wpsd-text-field:focus {
     /*box-shadow: 0 0px 20px #808080; */
-    border: 1px solid red!important;
+    border: 1px solid #24B47E;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content ul#wpsd_donate_amount {
@@ -130,9 +137,8 @@ img.wpsd-form-banner {
     margin: 0 0 20px;
     padding: 5px 15px 5px;
     font-size: 13px;
-    border: 1px solid #808080;
-    border-radius: 5px;
-    box-shadow: 0 0px 15px #C0C0C0;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
     transition: all 0.3s linear;
 }
 
@@ -143,10 +149,14 @@ img.wpsd-form-banner {
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
-    border: 1px solid #808080;
+    border: 1px solid #dddddd;
     margin: 0;
     padding: 0 4px;
     max-width: 100px!important;
+}
+
+.wpsd-master-wrapper .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount:focus {
+    border: 1px solid #999;
 }
 
 .wpsd-master-wrapper .wpsd-wrapper-content .wpsd-donate-button {
@@ -200,38 +210,16 @@ img.wpsd-form-banner {
 Template 1
 ===============================*/
 
-.wpsd-master-wrapper.wpsd-template-1 {
-    box-shadow: 0 3px 20px #FFC0CB;
-}
-
-.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-header {
-    background: #FF69B4;
-    background: -moz-linear-gradient(top, #FF69B4 0%, #FFC0CB 100%);
-    background: -webkit-linear-gradient(top, #FF69B4 0%, #FFC0CB 100%);
-    background: linear-gradient(to bottom, #FF69B4 0%, #FFC0CB 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#FF69B4', endColorstr='#FFC0CB', GradientType=1);
-}
-
-.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content {
-    background: #fefdfa;
-}
-
 .wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-donate-button {
     background: #FF69B4;
 }
 
-.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-text-field,
-.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content ul#wpsd_donate_amount {
-    box-shadow: 0 0px 15px #FFC0CB;
-    border-color: #FF69B4;
-}
-
-.wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
-    border-color: #FF69B4;
-}
-
 .wpsd-master-wrapper.wpsd-template-1 .wpsd-wrapper-content .wpsd-text-field:focus {
-    box-shadow: 0 0px 15px #FF69B4;
+    border: 1px solid #FF69B4;
+}
+
+.wpsd-master-wrapper.wpsd-template-1 .wpsd-form-title-border {
+    background-color: #FF69B4;
 }
 
 
@@ -239,38 +227,16 @@ Template 1
 Template 2
 ===============================*/
 
-.wpsd-master-wrapper.wpsd-template-2 {
-    box-shadow: 0 3px 20px #40E0D0;
-}
-
-.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-header {
-    background: #008B8B;
-    background: -moz-linear-gradient(top, #008B8B 0%, #40E0D0 100%);
-    background: -webkit-linear-gradient(top, #008B8B 0%, #40E0D0 100%);
-    background: linear-gradient(to bottom, #008B8B 0%, #40E0D0 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#008B8B', endColorstr='#40E0D0', GradientType=1);
-}
-
-.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content {
-    background: #EFFAFF;
-}
-
 .wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-donate-button {
     background: #008B8B;
 }
 
-.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-text-field,
-.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content ul#wpsd_donate_amount {
-    box-shadow: 0 0px 15px #40E0D0;
-    border-color: #008B8B;
-}
-
-.wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
-    border-color: #008B8B;
-}
-
 .wpsd-master-wrapper.wpsd-template-2 .wpsd-wrapper-content .wpsd-text-field:focus {
-    box-shadow: 0 0px 15px #008B8B;
+    border: 1px solid #008B8B;
+}
+
+.wpsd-master-wrapper.wpsd-template-2 .wpsd-form-title-border {
+    background-color: #008B8B;
 }
 
 
@@ -278,80 +244,33 @@ Template 2
 Template 3
 ===============================*/
 
-.wpsd-master-wrapper.wpsd-template-3 {
-    box-shadow: 0 3px 20px #87CEFA;
-}
-
-.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-header {
-    background: #1E90FF;
-    background: -moz-linear-gradient(top, #1E90FF 0%, #87CEFA 100%);
-    background: -webkit-linear-gradient(top, #1E90FF 0%, #87CEFA 100%);
-    background: linear-gradient(to bottom, #1E90FF 0%, #87CEFA 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1E90FF', endColorstr='#87CEFA', GradientType=1);
-}
-
-.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content {
-    background: #F1FEFF;
-}
-
 .wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-donate-button {
     background: #1E90FF;
 }
 
-.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-text-field,
-.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content ul#wpsd_donate_amount {
-    box-shadow: 0 0px 15px rgba(87, 189, 199, 0.2);
-    border-color: #1E90FF;
-}
-
-.wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
-    border-color: #1E90FF;
-}
-
-
-/*
 .wpsd-master-wrapper.wpsd-template-3 .wpsd-wrapper-content .wpsd-text-field:focus {
-    box-shadow: 0 0px 15px #1E90FF;
+    border: 1px solid #1E90FF;
 }
-*/
+
+.wpsd-master-wrapper.wpsd-template-3 .wpsd-form-title-border {
+    background-color: #1E90FF;
+}
 
 
 /*=============================
 Template 4
 ===============================*/
 
-.wpsd-master-wrapper.wpsd-template-4 {
-    box-shadow: 0 3px 20px #DEB887;
-}
-
-.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-header {
-    background: #DEB887;
-    background: -moz-linear-gradient(top, #DEB887 0%, #FFDEAD 100%);
-    background: -webkit-linear-gradient(top, #DEB887 0%, #FFDEAD 100%);
-    background: linear-gradient(to bottom, #DEB887 0%, #FFDEAD 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#DEB887', endColorstr='#FFDEAD', GradientType=1);
-}
-
-.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content {
-    background: #FFF8DC;
-}
-
 .wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-donate-button {
     background: #DEB887;
 }
 
-.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-text-field,
-.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content ul#wpsd_donate_amount {
-    box-shadow: 0 0px 15px #FFDEAD;
-    border-color: #DEB887;
-}
-
-.wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content #wpsd-donation-form-id #wpsd_donate_other_amount {
-    border-color: #DEB887;
-}
-
 .wpsd-master-wrapper.wpsd-template-4 .wpsd-wrapper-content .wpsd-text-field:focus {
-    box-shadow: 0 0px 15px #DEB887;
+    border: 1px solid #DEB887;
+}
+
+.wpsd-master-wrapper.wpsd-template-4 .wpsd-form-title-border {
+    background-color: #DEB887;
 }
 
 
@@ -406,6 +325,3 @@ Template 4
         padding: 30px 15px;
     }
 }
-
-
-/*  */

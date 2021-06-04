@@ -131,6 +131,13 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 == Changelog ==
 
+= 2.1 =
+* Remove Fixed Header
+* Remove Popup Logo
+* Style Updated
+* Show/Hide form label
+* Template design improved
+
 = 2.0 =
 * Stripe SCA compliance integrated with 3D security
 * Payment Modal removed
