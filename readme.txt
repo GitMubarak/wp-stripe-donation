@@ -137,6 +137,7 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 * Style Updated
 * Show/Hide form label
 * Template design improved
+* Fix console error if no publishable key is defined
 
 = 2.0 =
 * Stripe SCA compliance integrated with 3D security

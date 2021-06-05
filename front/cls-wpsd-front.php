@@ -37,7 +37,7 @@ class Wpsd_Front {
 		);
 
 		$wpsdKeySettings		= stripslashes_deep( unserialize( get_option('wpsd_key_settings') ) );
-		$wpsdPrimaryKey 		= isset( $wpsdKeySettings['wpsd_private_key'] ) ? $wpsdKeySettings['wpsd_private_key'] : '';
+		$wpsdPrimaryKey 		= isset( $wpsdKeySettings['wpsd_private_key'] ) ? $wpsdKeySettings['wpsd_private_key'] : 'pk_test_12345';
 		$wpsdSecretKey 			= isset( $wpsdKeySettings['wpsd_secret_key'] ) ? $wpsdKeySettings['wpsd_secret_key'] : '';
 
 		$wpsdGeneralSettings	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
