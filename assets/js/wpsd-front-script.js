@@ -34,6 +34,7 @@
 
         e.preventDefault();
         var wpsdShowCheckout = true;
+
         if (($("#wpsd_donation_for").val() == '') || ($("#wpsd_donation_for").val() == null)) {
             $('#card-errors').show('slow').addClass('error').html('Please Enter Donation For');
             $("#wpsd_donation_for").focus();
@@ -58,26 +59,24 @@
             return false;
         }
 
-        if ($("#wpsd_donate_other_amount").val() != '') {
-            wpsdDonateAmount = $("#wpsd_donate_other_amount").val();
-        } else {
-            var wpsdRadioVal = $(".wpsd-wrapper-content #wpsd_donate_amount input[name='wpsd_donate_amount']:checked").val();
-            if (wpsdRadioVal !== undefined) {
-                wpsdDonateAmount = wpsdRadioVal;
-            } else {
-                wpsdShowCheckout = false;
-                $('#card-errors').show('slow').addClass('error').html('Amount Missing');
-            }
-        }
-
-        if (wpsdAdminScriptObj.stripePKey == '') {
-            $('#card-errors').show('slow').addClass('error').html('Private key missing!');
+        if ($("#wpsd_donate_other_amount").val() == '') {
+            $('#card-errors').show('slow').addClass('error').html('Amount Missing');
+            $("#wpsd_donate_other_amount").focus();
             return false;
         }
-
+        /*
+        if (wpsdAdminScriptObj.stripePKey == '') {
+            $('#card-errors').show('slow').addClass('error').html('Publishable key missing!');
+            return false;
+        }
+        */
         if (wpsdAdminScriptObj.stripeSKey == '') {
             $('#card-errors').show('slow').addClass('error').html('Secret key missing!');
             return false;
+        }
+
+        if ($("#wpsd_donate_other_amount").val() !== '') {
+            wpsdDonateAmount = $("#wpsd_donate_other_amount").val();
         }
 
         if (wpsdShowCheckout) {
@@ -97,6 +96,9 @@
                     idempotency: wpsdAdminScriptObj.idempotency
                 },
                 success: function(response) {
+
+
+
                     if (response.status === 'success') {
                         stripe.confirmCardPayment(response.client_secret, {
                             payment_method: {
@@ -113,7 +115,7 @@
                                 $('#card-errors').text(result.error.message);
 
                             } else {
-
+                                $("#wpsd-pageloader").fadeIn();
                                 if (result.paymentIntent.status === 'succeeded') {
 
                                     afterPaymentSucceeded($("#wpsd_donator_email").val(), wpsdDonateAmount, $("#wpsd_donation_for").val(), $("#wpsd_donator_name").val(), wpsdAdminScriptObj.currency);
@@ -122,6 +124,7 @@
                         });
                     }
                     if (response.status === 'error') {
+                        $("#wpsd-pageloader").fadeOut();
                         $('#card-errors').show('slow').removeClass('success').addClass(response.status).html(response.message);
                     }
                 }
@@ -131,7 +134,10 @@
 
     $("#wpsd-donation-form-id input[type='radio']").on("click", function() {
 
-        $('#wpsd_donate_other_amount').val('');
+        var wpsdRadioVal = $(this).val();
+        if (wpsdRadioVal !== undefined) {
+            $("#wpsd_donate_other_amount").val(wpsdRadioVal);
+        }
 
     });
 

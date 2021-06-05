@@ -44,6 +44,10 @@ $wpsd_form_description      = isset( $wpsdGeneralSettings['wpsd_form_description
 $wpsdDonOpVals = ( $wpsdDonationOptions != '' ) ? explode(',', $wpsdDonationOptions) : array();
 ?>
 <div class="wpsd-master-wrapper wpsd-template-<?php printf('%d', $wpsdSelectTemp); ?>" id="wpsd-wrap-all">
+
+    <div id="wpsd-pageloader">
+    <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+    </div>
     
     <h3 class="wpsd-form-title"><?php esc_html_e( $wpsdPaymentTitle ); ?></h3>
     <div class="wpsd-form-title-border"></div>
@@ -58,7 +62,7 @@ $wpsdDonOpVals = ( $wpsdDonationOptions != '' ) ? explode(',', $wpsdDonationOpti
 
     <div class="wpsd-wrapper-content">
 
-        <form action="" method="POST" id="wpsd-donation-form-id" autocomplete="off">
+        <form action="" method="POST" id="wpsd-donation-form-id" autocomplete="on">
             
             <?php
             if ( ! $wpsd_hide_label ) {
@@ -123,7 +127,7 @@ $wpsdDonOpVals = ( $wpsdDonationOptions != '' ) ? explode(',', $wpsdDonationOpti
                         <div class="form-group">
                             <input type="radio" id="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>" name="wpsd_donate_amount"
                                 value="<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>">
-                            <label for="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>"><?php echo esc_html( trim( $wpsdDonationVal ) ); ?> <?php echo esc_html($wpsdDonateCurrency); ?></label>
+                            <label for="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>"><?php echo esc_html( trim( $wpsdDonationVal ) ); ?></label>
                         </div>
                     </li>
                     <?php

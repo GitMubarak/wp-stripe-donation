@@ -32,6 +32,29 @@
 
 /* alert ended */
 
+
+/* pageloader started */
+
+#wpsd-pageloader {
+    background: rgba( 255, 255, 255, 0.8);
+    display: none;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+}
+
+#wpsd-pageloader img {
+    left: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    position: absolute;
+    top: 50%;
+}
+
+
+/* pageloader ended */
+
 .wpsd-wrapper-content .dashicons,
 .dashicons-before::before {
     font-size: 12px;
@@ -40,14 +63,15 @@
 
 .wpsd-master-wrapper {
     box-shadow: 0 3px 10px #555555;
-    margin: 15px 0;
-    padding-top: 30px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .wpsd-master-wrapper h3.wpsd-form-title {
     font-size: 26px;
     margin-bottom: 16px;
     text-align: center;
+    margin-top: 30px;
 }
 
 .wpsd-form-title-border {
@@ -64,6 +88,7 @@
     margin: 18px 0px 30px 0px;
     width: 100%;
     text-align: center;
+    padding: 0 20px 0 20px;
 }
 
 img.wpsd-form-banner {
