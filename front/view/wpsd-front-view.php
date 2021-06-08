@@ -62,7 +62,7 @@ $wpsdDonOpVals = ( $wpsdDonationOptions != '' ) ? explode(',', $wpsdDonationOpti
 
     <div class="wpsd-wrapper-content">
 
-        <form action="" method="POST" id="wpsd-donation-form-id" autocomplete="on">
+        <form action="" method="POST" id="wpsd-donation-form-id" autocomplete="off">
             
             <?php
             if ( ! $wpsd_hide_label ) {
@@ -127,7 +127,7 @@ $wpsdDonOpVals = ( $wpsdDonationOptions != '' ) ? explode(',', $wpsdDonationOpti
                         <div class="form-group">
                             <input type="radio" id="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>" name="wpsd_donate_amount"
                                 value="<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>">
-                            <label for="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>"><?php echo esc_html( trim( $wpsdDonationVal ) ); ?></label>
+                            <label for="amount_<?php echo esc_attr( trim( $wpsdDonationVal ) ); ?>"><?php echo esc_html( number_format( $wpsdDonationVal ) ); ?></label>
                         </div>
                     </li>
                     <?php

@@ -73,6 +73,15 @@ class Wpsd_Admin
 
 		add_submenu_page(
 			'wpsd-admin-settings',
+			__('Receipt Email', WPSD_TXT_DOMAIN),
+			__('Receipt Email', WPSD_TXT_DOMAIN),
+			'manage_options',
+			'wpsd-email-settings',
+			array( $this, 'wpsd_email_settings')
+		);
+
+		add_submenu_page(
+			'wpsd-admin-settings',
 			__('Help & Usage', WPSD_TXT_DOMAIN),
 			__('Help & Usage', WPSD_TXT_DOMAIN),
 			'manage_options',
@@ -176,6 +185,10 @@ class Wpsd_Admin
 		}
 	}
 
+	function wpsd_email_settings() {
+		require_once WPSD_PATH . 'admin/view/wpsd-receipt-email-settings.php';
+	}
+
 	function wpsd_get_help() {
 		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'help-usage.php';
 	}
@@ -213,6 +226,10 @@ class Wpsd_Admin
 			</div>
 		</div> 
 		<?php
+	}
+
+	function get_receipt_email_settings() {
+		return stripslashes_deep( unserialize( get_option('wpsd_receipt_email_settings') ) );
 	}
 }
 ?>

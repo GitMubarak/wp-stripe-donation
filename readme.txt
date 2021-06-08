@@ -139,6 +139,7 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 * Template design improved
 * Fix console error if no publishable key is defined
 * Loading gif integrated when payment process is ongoing
+* Number format applyed in form amount
 
 = 2.0 =
 * Stripe SCA compliance integrated with 3D security
