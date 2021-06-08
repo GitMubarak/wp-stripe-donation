@@ -232,7 +232,7 @@ class Wpsd_Front {
 		$donorEmailMessage .= '<br>' . esc_html( $wpsd_re_email_heading );
 		$donorEmailMessage .= '<br>' . __('Amount received: ', WPSD_TXT_DOMAIN) . $wpsdAmount . $wpsdCurrency;
 		$donorEmailMessage .= '<br>' . __('For: ', WPSD_TXT_DOMAIN) . $wpsdDonationFor;
-		$donorEmailMessage .= '<br>' . esc_html( $wpsd_re_email_footnote );
+		$donorEmailMessage .= '<br><br>' . esc_html( $wpsd_re_email_footnote );
 		
 		return wp_mail( $wpsdEmail, $donorEmailSubject, $donorEmailMessage, $headers );
 	}
