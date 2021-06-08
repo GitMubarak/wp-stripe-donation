@@ -1,9 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$wpsd_re_email_subject  = array_key_exists( 'wpsd_re_email_subject', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_subject'] : '';
-$wpsd_re_email_heading  = array_key_exists( 'wpsd_re_email_heading', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_heading'] : '';
-$wpsd_re_email_footnote  = array_key_exists( 'wpsd_re_email_footnote', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_footnote'] : '';
+$wpsd_re_email_subject  = isset( $wpsdEmailSettings['wpsd_re_email_subject'] ) ? $wpsdEmailSettings['wpsd_re_email_subject'] : '';
+$wpsd_re_email_heading  = isset( $wpsdEmailSettings['wpsd_re_email_heading'] ) ? $wpsdEmailSettings['wpsd_re_email_heading'] : '';
+$wpsd_re_email_footnote	= isset( $wpsdEmailSettings['wpsd_re_email_footnote'] ) ? $wpsdEmailSettings['wpsd_re_email_footnote'] : '';
 ?>
 <div id="wpsd-wrap-all" class="wrap wpsd-email-settings">
 

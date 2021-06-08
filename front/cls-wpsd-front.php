@@ -221,14 +221,14 @@ class Wpsd_Front {
 	function wpsd_email_to_client( $wpsdEmail, $wpsdName, $wpsdAmount, $wpsdCurrency, $wpsdDonationFor ) {
 
 		$wpsdEmailSettings 		= $this->get_receipt_email_settings();
-		$wpsd_re_email_subject  = array_key_exists( 'wpsd_re_email_subject', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_subject'] : '';
-		$wpsd_re_email_heading  = array_key_exists( 'wpsd_re_email_heading', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_heading'] : '';
-		$wpsd_re_email_footnote	= array_key_exists( 'wpsd_re_email_footnote', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_footnote'] : '';
+		$wpsd_re_email_subject  = isset( $wpsdEmailSettings['wpsd_re_email_subject'] ) ? $wpsdEmailSettings['wpsd_re_email_subject'] : __('Amount Received', WPSD_TXT_DOMAIN);
+        $wpsd_re_email_heading  = isset( $wpsdEmailSettings['wpsd_re_email_heading'] ) ? $wpsdEmailSettings['wpsd_re_email_heading'] : '';
+        $wpsd_re_email_footnote	= isset( $wpsdEmailSettings['wpsd_re_email_footnote'] ) ? $wpsdEmailSettings['wpsd_re_email_footnote'] : '';
 
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 
 		$donorEmailSubject = esc_html( $wpsd_re_email_subject );
-		$donorEmailMessage = __('Hello' . WPSD_TXT_DOMAIN) . ', ' . $wpsdName;
+		$donorEmailMessage = __('Hello', WPSD_TXT_DOMAIN) . ' ' . $wpsdName . ',';
 		$donorEmailMessage .= '<br>' . esc_html( $wpsd_re_email_heading );
 		$donorEmailMessage .= '<br>' . __('Amount received: ', WPSD_TXT_DOMAIN) . $wpsdAmount . $wpsdCurrency;
 		$donorEmailMessage .= '<br>' . __('For: ', WPSD_TXT_DOMAIN) . $wpsdDonationFor;
