@@ -1,18 +1,9 @@
 <?php
-$wpsdEmailShowMessage = false;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( isset( $_POST['updateEmailSettings'] ) ) {
-
-    $wpsdEmailSettingsInfo = array(
-        'wpsd_re_email_subject'        => isset( $_POST['wpsd_re_email_subject'] ) ? sanitize_text_field( $_POST['wpsd_re_email_subject'] ) : '',
-        //'wpsd_donation_options'     => isset( $_POST['wpsd_donation_options'] ) ? sanitize_textarea_field( $_POST['wpsd_donation_options'] ) : '',
-    );
-
-    $wpsdEmailShowMessage = update_option( 'wpsd_receipt_email_settings', serialize( $wpsdEmailSettingsInfo ) );
-}
-
-$wpsdEmailSettings      = $this->get_receipt_email_settings();
 $wpsd_re_email_subject  = array_key_exists( 'wpsd_re_email_subject', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_subject'] : '';
+$wpsd_re_email_heading  = array_key_exists( 'wpsd_re_email_heading', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_heading'] : '';
+$wpsd_re_email_footnote  = array_key_exists( 'wpsd_re_email_footnote', $wpsdEmailSettings ) ? $wpsdEmailSettings['wpsd_re_email_footnote'] : '';
 ?>
 <div id="wpsd-wrap-all" class="wrap wpsd-email-settings">
 
@@ -40,6 +31,32 @@ $wpsd_re_email_subject  = array_key_exists( 'wpsd_re_email_subject', $wpsdEmailS
                         <td>
                             <input type="text" name="wpsd_re_email_subject" id="wpsd_re_email_subject" class="regular-text"
                                 value="<?php esc_attr_e( $wpsd_re_email_subject ); ?>" />
+                            <br>
+                            <code><?php _e('We received your payment!', WPSD_TXT_DOMAIN); ?></code>
+                        </td>
+                    </tr>
+                    <tr class="wpsd_re_email_heading">
+                        <th scope="row">
+                            <label
+                                for="wpsd_re_email_heading"><?php _e('Heading:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_re_email_heading" id="wpsd_re_email_heading" class="regular-text"
+                                value="<?php esc_attr_e( $wpsd_re_email_heading ); ?>" />
+                            <br>
+                            <code><?php _e('Thanks for your payment!', WPSD_TXT_DOMAIN); ?></code>
+                        </td>
+                    </tr>
+                    <tr class="wpsd_re_email_footnote">
+                        <th scope="row">
+                            <label
+                                for="wpsd_re_email_footnote"><?php _e('Footnote:', WPSD_TXT_DOMAIN); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="wpsd_re_email_footnote" id="wpsd_re_email_footnote" class="regular-text"
+                                value="<?php esc_attr_e( $wpsd_re_email_footnote ); ?>" />
+                            <br>
+                            <code><?php _e('If you have any question, please reply this email.', WPSD_TXT_DOMAIN); ?></code>
                         </td>
                     </tr>
                 </table>

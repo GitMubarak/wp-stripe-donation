@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  *	Admin Panel Parent Class
@@ -6,14 +7,14 @@
 class Wpsd_Admin
 {
 	use HM_Currency;
+	use Wpsd_Common;
 
 	private $wpsd_version;
 	private $wpsd_option_group;
 	private $wpsd_assets_prefix;
 	protected $wpsdTable;
 
-	public function __construct($version)
-	{
+	public function __construct( $version ) {
 		$this->wpsd_version = $version;
 		$this->wpsdTable = WPSD_TABLE;
 		$this->wpsd_option_group = WPSD_PRFX . 'options_group';
@@ -23,8 +24,7 @@ class Wpsd_Admin
 	/**
 	 *	Loading the admin menu
 	 */
-	public function wpsd_admin_menu()
-	{
+	public function wpsd_admin_menu() {
 		add_menu_page(
 			__('WP Stripe Donation', WPSD_TXT_DOMAIN),
 			__('WP Stripe Donation', WPSD_TXT_DOMAIN),
@@ -93,8 +93,7 @@ class Wpsd_Admin
 	/**
 	 *	Loading admin panel assets
 	 */
-	function wpsd_admin_assets()
-	{
+	function wpsd_admin_assets() {
 		wp_enqueue_style(
 			$this->wpsd_assets_prefix . 'admin-style',
 			WPSD_ASSETS . 'css/' . $this->wpsd_assets_prefix . 'admin-style.css',
@@ -108,9 +107,10 @@ class Wpsd_Admin
 
 		wp_enqueue_media();
 
-		if (!wp_script_is('jquery')) {
+		if ( ! wp_script_is('jquery')) {
 			wp_enqueue_script('jquery');
 		}
+
 		wp_enqueue_script(
 			$this->wpsd_assets_prefix . 'admin-script',
 			WPSD_ASSETS . 'js/' . $this->wpsd_assets_prefix . 'admin-script.js',
@@ -118,10 +118,13 @@ class Wpsd_Admin
 			$this->wpsd_version,
 			TRUE
 		);
-		$wpsd_settings = get_option('wpsd_settings');
+
+		//$wpsd_settings = get_option('wpsd_settings');
+
 		$wpsdAdminArray = array(
-			'wpsdIdsOfColorPicker' => array()
+			'wpsdIdsOfColorPicker' => array(),
 		);
+
 		wp_localize_script($this->wpsd_assets_prefix . 'admin-script', 'wpsdAdminScript', $wpsdAdminArray);
 	}
 
@@ -143,6 +146,20 @@ class Wpsd_Admin
 		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'template-settings.php';
 	}
 
+	function wpsd_email_settings() {
+
+		$wpsdEmailShowMessage = false;
+		
+		if ( isset( $_POST['updateEmailSettings'] ) ) {
+
+			$wpsdEmailShowMessage = $this->post_receipt_email_settings( $_POST );
+		}
+
+		$wpsdEmailSettings      = $this->get_receipt_email_settings();
+		
+		require_once WPSD_PATH . 'admin/view/wpsd-receipt-email-settings.php';
+	}
+
 	function wpsd_all_donations()
 	{
 		$wpsdColumns = array(
@@ -155,6 +172,10 @@ class Wpsd_Admin
 		);
 		register_column_headers('wpsd-column-table', $wpsdColumns);
 		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'all-donations.php';
+	}
+
+	function wpsd_get_help() {
+		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'help-usage.php';
 	}
 
 	protected function wpsd_get_all_donations()
@@ -183,53 +204,6 @@ class Wpsd_Admin
 		} else {
 			wp_send_json_error();
 		}
-	}
-
-	function wpsd_email_settings() {
-		require_once WPSD_PATH . 'admin/view/wpsd-receipt-email-settings.php';
-	}
-
-	function wpsd_get_help() {
-		require_once WPSD_PATH . 'admin/view/' . $this->wpsd_assets_prefix . 'help-usage.php';
-	}
-
-	function wpsd_admin_sidebar() {
-		?>
-		<div class="wpsd-admin-sidebar" style="width: 277px; float: left; margin-top: 5px;">
-			<div class="postbox">
-				<h3 class="hndle"><span>Support / Bug / Customization</span></h3>
-				<div class="inside centered">
-					<p>Please feel free to let us know if you have any bugs to report. Your report / suggestion can make the plugin awesome!</p>
-					<p style="margin-bottom: 1px! important;"><a href="https://hmplugin.com/contact-us/" target="_blank" class="button button-primary">Get Support</a></p>
-				</div>
-			</div>
-			<div class="postbox">
-				<h3 class="hndle"><span>Buy us a coffee</span></h3>
-				<div class="inside centered">
-					<p>If you like the plugin, would you like to support the advancement of this plugin?</p>
-					<p style="margin-bottom: 1px! important;"><a href='https://www.paypal.me/mhmrajib' class="button button-primary" target="_blank">Donate</a></p>
-				</div>
-			</div>
-
-			<div class="postbox">
-				<h3 class="hndle"><span>Join HM Plugin on facebook</span></h3>
-				<div class="inside centered">
-					<iframe src="//www.facebook.com/plugins/likebox.php?href=https://www.facebook.com/hmplugin&amp;width&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:220px;" allowTransparency="true"></iframe>
-				</div>
-			</div>
-
-			<div class="postbox">
-				<h3 class="hndle"><span>Follow HM Plugin on twitter</span></h3>
-				<div class="inside centered">
-					<a href="https://twitter.com/hmplugin" target="_blank" class="button button-secondary">Follow @hmplugin<span class="dashicons dashicons-twitter" style="position: relative; top: 3px; margin-left: 3px; color: #0fb9da;"></span></a>
-				</div>
-			</div>
-		</div> 
-		<?php
-	}
-
-	function get_receipt_email_settings() {
-		return stripslashes_deep( unserialize( get_option('wpsd_receipt_email_settings') ) );
 	}
 }
 ?>

@@ -26,6 +26,7 @@ class Wpsd_Master {
 
 	private function wpsd_load_dependencies() {
 		require_once WPSD_PATH . 'inc/cls-hm-currency.php';
+		require_once WPSD_PATH . 'inc/cls-wpsd-comm.php';
 		require_once WPSD_PATH . 'admin/' . WPSD_CLS_PRFX . 'admin.php';
 		require_once WPSD_PATH . 'front/' . WPSD_CLS_PRFX . 'front.php';
 		require_once WPSD_PATH . 'inc/' . WPSD_CLS_PRFX . 'loader.php';
