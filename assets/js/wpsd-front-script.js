@@ -81,6 +81,8 @@
 
         if (wpsdShowCheckout) {
 
+            $("#wpsd-pageloader").fadeIn();
+
             $.ajax({
                 url: wpsdAdminScriptObj.ajaxurl,
                 type: "POST",
@@ -96,9 +98,6 @@
                     idempotency: wpsdAdminScriptObj.idempotency
                 },
                 success: function(response) {
-
-
-
                     if (response.status === 'success') {
                         stripe.confirmCardPayment(response.client_secret, {
                             payment_method: {
@@ -111,13 +110,11 @@
                         }).then(function(result) {
 
                             if (result.error) {
-
+                                $("#wpsd-pageloader").fadeOut();
                                 $('#card-errors').text(result.error.message);
 
                             } else {
-                                $("#wpsd-pageloader").fadeIn();
                                 if (result.paymentIntent.status === 'succeeded') {
-
                                     afterPaymentSucceeded($("#wpsd_donator_email").val(), wpsdDonateAmount, $("#wpsd_donation_for").val(), $("#wpsd_donator_name").val(), wpsdAdminScriptObj.currency);
                                 }
                             }
