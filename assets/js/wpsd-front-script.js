@@ -69,12 +69,12 @@
             $('#card-errors').show('slow').addClass('error').html('Publishable key missing!');
             return false;
         }
-        */
+        
         if (wpsdAdminScriptObj.stripeSKey == '') {
             $('#card-errors').show('slow').addClass('error').html('Secret key missing!');
             return false;
         }
-
+        */
         if ($("#wpsd_donate_other_amount").val() !== '') {
             wpsdDonateAmount = $("#wpsd_donate_other_amount").val();
         }
@@ -89,7 +89,6 @@
                 dataType: "JSON",
                 data: {
                     action: 'wpsd_donation',
-                    wpsdSecretKey: wpsdAdminScriptObj.stripeSKey,
                     email: $("#wpsd_donator_email").val(),
                     amount: wpsdDonateAmount,
                     donation_for: $("#wpsd_donation_for").val(),

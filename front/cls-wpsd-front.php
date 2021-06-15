@@ -39,14 +39,12 @@ class Wpsd_Front {
 
 		$wpsdKeySettings		= stripslashes_deep( unserialize( get_option('wpsd_key_settings') ) );
 		$wpsdPrimaryKey 		= isset( $wpsdKeySettings['wpsd_private_key'] ) ? $wpsdKeySettings['wpsd_private_key'] : 'pk_test_12345';
-		$wpsdSecretKey 			= isset( $wpsdKeySettings['wpsd_secret_key'] ) ? $wpsdKeySettings['wpsd_secret_key'] : '';
 
 		$wpsdGeneralSettings	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
 		$wpsdDonateCurrency 	= isset( $wpsdGeneralSettings['wpsd_donate_currency'] ) ? $wpsdGeneralSettings['wpsd_donate_currency'] : 'USD';
 
 		$wpsdAdminArray = array(
 			'stripePKey'	=> $wpsdPrimaryKey,
-			'stripeSKey'	=> $wpsdSecretKey,
 			'ajaxurl' 		=> admin_url('admin-ajax.php'),
 			'currency'		=> $wpsdDonateCurrency,
 			'successUrl'	=> get_site_url() . '/wpsd-thank-you',
@@ -71,8 +69,7 @@ class Wpsd_Front {
 	function wpsd_donation_handler() {
 
 		if (
-			! empty( $_POST['wpsdSecretKey'] ) 
-			&& ! empty( $_POST['email'] ) 
+			! empty( $_POST['email'] ) 
 			&& ! empty( $_POST['amount'] ) 
 			&& ! empty( $_POST['name'] ) 
 			&& ! empty( $_POST['donation_for'] )
@@ -83,8 +80,10 @@ class Wpsd_Front {
 			$wpsdEmail 			= sanitize_email( $_POST['email'] );
 			$wpsdAmount 		= filter_var( $_POST['amount'], FILTER_SANITIZE_STRING );
 			$wpsdCurrency 		= sanitize_text_field( $_POST['currency'] );
-			$wpsdStripeKey 		= sanitize_text_field( $_POST['wpsdSecretKey'] );
 			$idempotency 		= preg_replace('/[^a-z\d]/im', '', $_POST['idempotency']);
+
+			$wpsdKeySettings	= stripslashes_deep( unserialize( get_option('wpsd_key_settings') ) );
+			$wpsdStripeKey 		= isset( $wpsdKeySettings['wpsd_secret_key'] ) ? $wpsdKeySettings['wpsd_secret_key'] : '';
 			
 			require_once( WPSD_PATH . 'front/stripe/init.php' );
 			
