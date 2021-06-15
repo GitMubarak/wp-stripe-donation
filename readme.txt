@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/mhmrajib
 Tags: charity, donate, donation, donations, stripe
 Requires at least: 4.6
 Tested up to: 5.7.2
-Stable tag: 2.1
+Stable tag: 2.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -13,13 +13,17 @@ This plugin will display a form to accept donation via Stripe payment.
 
 == Description ==
 
-This [Stripe Donations](https://hmplugin.com) plugin will allow you to collect donations on your website via Stripe payment method.
+This [Stripe Donations](https://hmplugin.com/wordpress-plugins/wordpress-stripe-donation-plugin/) plugin will allow you to collect donations on your website via Stripe payment method.
 
 You can place a Donation form in any page where you want to collect money. Donors can use their Stripe account or Credit Card to donate money to you.
 
-What makes this [Stripe Donations](https://demo.hmplugin.com/wp-stripe-donation/) plugin powerful is its usability. After installation and some quick settings, donors from around the world can start donating to you via Stripe.
+What makes this [Stripe Donations](https://hmplugin.com/wordpress-plugins/wordpress-stripe-donation-plugin/) plugin powerful is its usability. After installation and some quick settings, donors from around the world can start donating to you via Stripe.
 
 This Stripe Donation is a simple, effective and powerful plugin you can trust.
+
+<strong> See How It Works!: </strong>
+
+https://youtu.be/fYP5CTIH90o
 
 
 **🌟 Plugin Features:**
@@ -27,28 +31,43 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 * Easy to install
 * Works with any WordPress theme
 * Fully Responsive
-* No Coding required
 * Shortcoded
 * Minimal settings required
-* Accept donation via Stripe payment
-* Option for Donation info email where instant email sent with donation info when donors donate
-* Donation Title changing option
-* Donation Button Text changing option included
-* Stripe Payment Logo Changing option available (When Stripe PopUp occurs)
-* View donations list in your WordPress admin panel
 * Super Easy and Fast
-* Currency changing option
-* Donation form banner upload option
-* 5 colorful themes
-* Show/Hide Banner option
-* Show/Hide Header option
-* Donation For Label Option
-* Donator Name Label Option
-* Donator Email Label Option
-* Donator Phone Label Option
-* Donate Amount Label Option
-* Set various donate amount from admin panel like 100, 200, 500 etc.
-* Email sending to Donor with donation information
+* Accept donation via Stripe payment
+* Donors List Panel
+* 150+ Currency Available
+* Two types of email integrated: Admin and Receipient
+* 5 Template Colors
+* Strong Customer Authentication (SCA) supports for European customers
+
+
+**🌟 Form Features:**
+
+* Form Title
+* Form Description
+* Form Banner
+* Dropdown 'Donation For' Options
+* Set various Donation Amounts
+* Show/Hide Banner
+* Upload Banner
+* Show/Hide Form Labels
+* Customizable Form Labels
+* Customizable Form Button
+
+
+**🌟 Receipt Email Settings:**
+
+* Customizable Email Subject
+* Customizable Email Heading
+* Customizable Email Footnote
+
+
+**👍 Customizable Thank You Page:**
+
+A good business practice is say thank you to your new and returning customers. A good thank you quote or message will help build that strong customer loyalty that keeps your business afloat.
+
+Stripe Donation Plugin provides a built in ‘Thank You’ page which can be customize with Elementor.
 
 
 ➡️ Useage of Shortcode:⬅️
@@ -61,6 +80,11 @@ This Stripe Donation is a simple, effective and powerful plugin you can trust.
 **👨‍💻 Demo / Support/ Live Chat**
 
 [Stripe Donations: See Demo](https://demo.hmplugin.com/wordpress-stripe-donation-plugin/)
+
+
+**👨‍💻 More About Stripe Donation**
+
+[Stripe Donation: See More](https://hmplugin.com/wordpress-plugins/wordpress-stripe-donation-plugin/)
 
 
 **👍 Give us a Feedback/Rating**
@@ -118,18 +142,21 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 == Screenshots ==
 
-1. Donation Key Settings Page
-2. Donation General Settings Page
-3. Donation Template Settings Page
-4. Display All Donations in Admin Panel
-5. Donation Form Template 1
-6. Donation Form Template 2
-7. Donation Form Template 3
-8. Donation Form Template 4
-9. Donation Form Template 5
+1. Donation Form Template 1
+2. Donation Form Template 2
+3. Donation Form Template 3
+4. Donation Form Template 4
+5. Donation Form Template 5
+6. SCA supports for European customers
+7. Donation General Settings
+8. Donation Template Settings
+9. Customizable Receipt email
 
 
 == Changelog ==
+
+= 2.2 =
+* Security Update for keys
 
 = 2.1 =
 * Remove Fixed Header
