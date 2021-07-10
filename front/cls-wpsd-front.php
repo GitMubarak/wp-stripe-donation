@@ -1,10 +1,11 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
-
+/** 
+ * Master Class: Front
+*/
 class Wpsd_Front {
 
-	use HM_Currency;
-	use Wpsd_Common;
+	use HM_Currency, Wpsd_Common;
 
 	private $wpsd_version;
 
@@ -15,43 +16,48 @@ class Wpsd_Front {
 
 	function wpsd_front_assets() {
 
-		wp_enqueue_style(
-			$this->wpsd_assets_prefix . 'front-style',
-			WPSD_ASSETS . 'css/' . $this->wpsd_assets_prefix . 'front-style.css',
-			array(),
-			$this->wpsd_version,
-			FALSE
-		);
+		global $post;
+    	
+		if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'wp_stripe_donation') ) {
+			
+			wp_enqueue_style(
+				$this->wpsd_assets_prefix . 'front-style',
+				WPSD_ASSETS . 'css/' . $this->wpsd_assets_prefix . 'front-style.css',
+				array(),
+				$this->wpsd_version,
+				FALSE
+			);
 
-		if ( ! wp_script_is('jquery') ) {
-			wp_enqueue_script('jquery');
+			if ( ! wp_script_is('jquery') ) {
+				wp_enqueue_script('jquery');
+			}
+
+			wp_enqueue_script('checkout-stripe-js', '//js.stripe.com/v3/');
+
+			wp_enqueue_script(
+				$this->wpsd_assets_prefix . 'front-script',
+				WPSD_ASSETS . 'js/' . $this->wpsd_assets_prefix . 'front-script.js',
+				array('jquery'),
+				$this->wpsd_version,
+				TRUE
+			);
+
+			$wpsdKeySettings		= stripslashes_deep( unserialize( get_option('wpsd_key_settings') ) );
+			$wpsdPrimaryKey 		= isset( $wpsdKeySettings['wpsd_private_key'] ) ? $wpsdKeySettings['wpsd_private_key'] : 'pk_test_12345';
+
+			$wpsdGeneralSettings 	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
+			$wpsdDonateCurrency		= isset( $wpsdGeneralSettings['wpsd_donate_currency'] ) ? $wpsdGeneralSettings['wpsd_donate_currency'] : 'USD';
+
+			$wpsdAdminArray = array(
+				'stripePKey'	=> $wpsdPrimaryKey,
+				'ajaxurl' 		=> admin_url('admin-ajax.php'),
+				'currency'		=> $wpsdDonateCurrency,
+				'successUrl'	=> get_site_url() . '/wpsd-thank-you',
+				'idempotency' 	=> $this->wpsd_rand_string(8),
+			);
+
+			wp_localize_script( $this->wpsd_assets_prefix . 'front-script', 'wpsdAdminScriptObj', $wpsdAdminArray );
 		}
-
-		wp_enqueue_script('checkout-stripe-js', '//js.stripe.com/v3/');
-
-		wp_enqueue_script(
-			$this->wpsd_assets_prefix . 'front-script',
-			WPSD_ASSETS . 'js/' . $this->wpsd_assets_prefix . 'front-script.js',
-			array('jquery'),
-			$this->wpsd_version,
-			TRUE
-		);
-
-		$wpsdKeySettings		= stripslashes_deep( unserialize( get_option('wpsd_key_settings') ) );
-		$wpsdPrimaryKey 		= isset( $wpsdKeySettings['wpsd_private_key'] ) ? $wpsdKeySettings['wpsd_private_key'] : 'pk_test_12345';
-
-		$wpsdGeneralSettings	= stripslashes_deep( unserialize( get_option('wpsd_general_settings') ) );
-		$wpsdDonateCurrency 	= isset( $wpsdGeneralSettings['wpsd_donate_currency'] ) ? $wpsdGeneralSettings['wpsd_donate_currency'] : 'USD';
-
-		$wpsdAdminArray = array(
-			'stripePKey'	=> $wpsdPrimaryKey,
-			'ajaxurl' 		=> admin_url('admin-ajax.php'),
-			'currency'		=> $wpsdDonateCurrency,
-			'successUrl'	=> get_site_url() . '/wpsd-thank-you',
-			'idempotency' 	=> $this->wpsd_rand_string(8),
-		);
-
-		wp_localize_script($this->wpsd_assets_prefix . 'front-script', 'wpsdAdminScriptObj', $wpsdAdminArray);
 	}
 
 	function wpsd_load_shortcode() {

@@ -28,7 +28,7 @@ $wpsd_form_description  = isset( $wpsdGeneralSettings['wpsd_form_description'] )
 <div id="wpsd-wrap-all" class="wrap wpsd-general-settings">
 
     <div class="settings-banner">
-        <h2><?php esc_html_e('General Settings', WPSD_TXT_DOMAIN); ?></h2>
+        <h2><?php _e('General Settings', WPSD_TXT_DOMAIN); ?></h2>
     </div>
 
     <?php 

@@ -82,6 +82,11 @@ Stripe Donation Plugin provides a built in ‘Thank You’ page which can be cus
 https://youtu.be/TdyJ0F8jWu0
 
 
+**📋 Translation Ready:**
+
+* POT file included (/languages/)
+
+
 **👨‍💻 Demo / Support/ Live Chat**
 
 [Stripe Donations: See Demo](https://demo.hmplugin.com/wordpress-stripe-donation-plugin/)
@@ -161,7 +166,8 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 == Changelog ==
 
 = 2.3 =
-* Security Update for keys
+* Stripe.js and other related scripts/styles will only load in donation page
+* Language pot file added
 
 = 2.2 =
 * Security Update for keys
