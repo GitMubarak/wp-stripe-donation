@@ -2,10 +2,10 @@
 Contributors: mhmrajib, hmplugin
 Donate link: https://www.paypal.me/mhmrajib
 Tags: charity, donate, donation, donations, stripe
-Requires at least: 4.6
+Requires at least: 5.0
 Tested up to: 5.7.2
-Stable tag: 2.2
-Requires PHP: 5.6
+Stable tag: 2.3
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,11 @@ Stripe Donation Plugin provides a built in ‘Thank You’ page which can be cus
 <strong> To display donation form use the below shortcode in any page </strong>
 
 <pre> [wp_stripe_donation] </pre>
+
+
+<strong> SCA supports for European customers: </strong>
+
+https://youtu.be/TdyJ0F8jWu0
 
 
 **👨‍💻 Demo / Support/ Live Chat**
@@ -154,6 +159,9 @@ Setup the Private and Secret Key. And insert the shortcode to any page.
 
 
 == Changelog ==
+
+= 2.3 =
+* Security Update for keys
 
 = 2.2 =
 * Security Update for keys
